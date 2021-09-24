@@ -1,15 +1,9 @@
 package game;
 
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 import game.enums.Status;
 import game.interfaces.Behaviour;
-
 import java.util.ArrayList;
 
 /**
@@ -18,6 +12,8 @@ import java.util.ArrayList;
 public class Undead extends Actor {
 	// Will need to change this to a collection if Undeads gets additional Behaviours.
 	private ArrayList<Behaviour> behaviours = new ArrayList<>();
+	private FollowBehaviour followBehaviour;
+
 
 	/** 
 	 * Constructor.
@@ -27,6 +23,12 @@ public class Undead extends Actor {
 	public Undead(String name) {
 		super(name, 'u', 50);
 		behaviours.add(new WanderBehaviour());
+		this.addCapability(Status.HOSTILE_TO_ENEMY);
+	}
+
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(20, "punches");
 	}
 
 	/**
@@ -43,7 +45,12 @@ public class Undead extends Actor {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+			if(followBehaviour == null){
+				this.followBehaviour = new FollowBehaviour(otherActor);
+				behaviours.add(this.followBehaviour);
+			}
 			actions.add(new AttackAction(this,direction));
+
 		}
 		return actions;
 	}
@@ -56,12 +63,24 @@ public class Undead extends Actor {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// loop through all behaviours
-		for(Behaviour Behaviour : behaviours) {
+		if(!actions.getUnmodifiableActionList().isEmpty()) {
+			for (Action action : actions.getUnmodifiableActionList()) {
+				if (action.getClass() == AttackAction.class) {
+					return action;
+				}
+			}
+		}
+
+			for(Behaviour Behaviour : behaviours) {
+			if (behaviours.contains(followBehaviour)){
+				Action action = followBehaviour.getAction(this, map);
+				return action;
+			}
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
-		return new DoNothingAction();
+			return new DoNothingAction();
 	}
 
 }

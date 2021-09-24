@@ -31,6 +31,16 @@ public class Player extends Actor implements Soul {
 	}
 
 	@Override
+	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
+		Actions actions = new Actions();
+		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+			actions.add(new AttackAction(this,direction));
+		}
+		return actions;
+	}
+
+	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)

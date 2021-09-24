@@ -11,4 +11,5 @@ public class Floor extends Ground {
 		super('_');
 	}
 
+
 }
