@@ -9,7 +9,14 @@ import java.util.ArrayList;
 
 
 public class YhormTheGiant extends Enemy implements Soul {
+    /**
+     * An array list to store the behaviours of skeleton such as wander and follow behaviour
+     */
     private ArrayList<Behaviour> behaviours = new ArrayList<>();
+
+    /**
+     * Declaring a follow behaviour object
+     */
     private FollowBehaviour followBehaviour;
 
     /**
