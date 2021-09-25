@@ -39,6 +39,20 @@ public class AttackAction extends Action {
 		this.direction = direction;
 	}
 
+	public void transferSouls(Actor actor, GameMap map){
+		target.asSoul().transferSouls(actor.asSoul());
+		Actions dropActions = new Actions();
+		// drop all item
+		for (Item item : target.getInventory())
+			dropActions.add(item.getDropAction(actor));
+		for (Action drop : dropActions)
+			drop.execute(target, map);
+		// remove actor
+		//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
+		map.removeActor(target);
+
+	}
+
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		Weapon weapon = actor.getWeapon();
@@ -55,26 +69,26 @@ public class AttackAction extends Action {
 			if (target.getClass() == Skeleton.class) {
 				Skeleton skeleton = (Skeleton) target;
 				if (skeleton.isSkeletonFirstDeath()) {
-					Random random = new Random();
-					int randomInt = random.nextInt(100);
+					int randomInt = rand.nextInt(100);
 					if (randomInt >= 50) {
 						skeleton.heal(100);
 						skeleton.setSkeletonFirstDeath(false);
+					}else{
+						transferSouls(actor,map);
+						result += System.lineSeparator() + target + " is killed.";
 					}
 				} else {
-					target.asSoul().transferSouls(actor.asSoul());
-					Actions dropActions = new Actions();
-					// drop all item
-					for (Item item : target.getInventory())
-						dropActions.add(item.getDropAction(actor));
-					for (Action drop : dropActions)
-						drop.execute(target, map);
-					// remove actor
-					//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
-					map.removeActor(target);
+					transferSouls(actor,map);
 					result += System.lineSeparator() + target + " is killed.";
 				}
+			}else if(target.getClass() == YhormTheGiant.class){
+				transferSouls(actor,map);
+				result += System.lineSeparator() + "LORD OF CINDER FALLEN";
+			}else if(target.getClass() == Undead.class){
+				transferSouls(actor,map);
+				result += System.lineSeparator() + target + " is killed.";
 			}
+
 		}
 
 			return result;

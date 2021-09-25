@@ -29,6 +29,10 @@ public class Player extends Actor implements Soul {
 		return new IntrinsicWeapon(100, "punches");
 	}
 
+	public int getSoulCount() {
+		return soulCount;
+	}
+
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
@@ -42,6 +46,7 @@ public class Player extends Actor implements Soul {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
+		display.println(Integer.toString(this.getSoulCount()));
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 

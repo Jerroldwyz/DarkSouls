@@ -6,43 +6,22 @@ import game.interfaces.Behaviour;
 import game.interfaces.Soul;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Skeleton extends Enemy implements Soul {
-    /**
-     * A monster that holds either a broadsword or giant axe
-     */
+
+public class YhormTheGiant extends Enemy implements Soul {
     private ArrayList<Behaviour> behaviours = new ArrayList<>();
     private FollowBehaviour followBehaviour;
-    private boolean skeletonFirstDeath = true;
-
-    public boolean isSkeletonFirstDeath() {
-        return skeletonFirstDeath;
-    }
-
-    public void setSkeletonFirstDeath(boolean flag) {
-        skeletonFirstDeath = flag;
-    }
-
 
     /**
      * Constructor.
-     * All skeletons are represented by an 's' and have 100 hit points.
+     * All Undeads are represented by an 'u' and have 30 hit points.
      *
-     * @param name the name of this Skeleton
+     * @param name the name of this Undead
      */
-    public Skeleton(String name) {
-        super(name, 's', 100);
-        behaviours.add(new WanderBehaviour());
-        this.setSoulCount(250);
-        Random random = new Random();
-        int randomInt = random.nextInt(100);
-        if(randomInt < 50){
-//            this.addItemToInventory(BroadSword);
-        }else{
-//            this.addItemToInventory(GiantAxe);
-        }
-
+    public YhormTheGiant(String name) {
+        super(name, 'Y', 500);
+        this.setSoulCount(5000);
+        //this.addItemToInventory(new GreatMachete());
     }
 
     /**
@@ -82,7 +61,7 @@ public class Skeleton extends Enemy implements Soul {
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
                 if (action.getClass() == AttackAction.class) {
-                    display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                    display.println(this.getClass().getName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
                     return action;
                 }
             }

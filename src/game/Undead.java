@@ -29,6 +29,10 @@ public class Undead extends Enemy implements Soul {
 		this.setSoulCount(50);
 	}
 
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(20, "punches");
+	}
+
 	/**
 	 * At the moment, we only make it can be attacked by enemy that has HOSTILE capability
 	 * You can do something else with this method.
@@ -66,7 +70,7 @@ public class Undead extends Enemy implements Soul {
 		if (!actions.getUnmodifiableActionList().isEmpty()) {
 			for (Action action : actions.getUnmodifiableActionList()) {
 				if (action.getClass() == AttackAction.class) {
-					display.println(this.getClass().getName() + " [" + this.maxHitPoints + "/" + this.hitPoints + "] using fist");
+					display.println(this.getClass().getName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using fist");
 					return action;
 				}
 			}
