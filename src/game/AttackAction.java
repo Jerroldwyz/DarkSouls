@@ -39,6 +39,11 @@ public class AttackAction extends Action {
 		this.direction = direction;
 	}
 
+	/**
+	 * A method used in execute created to reduce repetition of code due to it being recurring
+	 * @param actor the non player character
+	 * @param map in case where actor drops an item
+	 */
 	public void transferSouls(Actor actor, GameMap map){
 		target.asSoul().transferSouls(actor.asSoul());
 		Actions dropActions = new Actions();

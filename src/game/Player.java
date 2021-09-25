@@ -26,6 +26,10 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 	}
 
+	/**
+	 * Gets the soul count of the player
+	 * @return soulcount
+	 */
 	public int getSoulCount() {
 		return soulCount;
 	}

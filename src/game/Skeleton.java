@@ -8,20 +8,39 @@ import game.interfaces.Soul;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * A monster that holds either a broadsword or giant axe
+ */
 public class Skeleton extends Enemy implements Soul {
     /**
-     * A monster that holds either a broadsword or giant axe
+     * An array list to store the behaviours of skeleton such as wander and follow behaviour
      */
     private ArrayList<Behaviour> behaviours = new ArrayList<>();
+
+    /**
+     * Declaring a follow behaviour object
+     */
     private FollowBehaviour followBehaviour;
+
+    /**
+     * Boolean value to determine if its the skeleton's first death
+     */
     private boolean skeletonFirstDeath = true;
 
+    /**
+     * Gets the boolean value of skeleton first death
+     * @return skeletonFirstDeath
+     */
     public boolean isSkeletonFirstDeath() {
         return skeletonFirstDeath;
     }
 
-    public void setSkeletonFirstDeath(boolean flag) {
-        skeletonFirstDeath = flag;
+    /**
+     * Setter for the skeleton first death
+     * @param isFirst boolean value to set
+     */
+    public void setSkeletonFirstDeath(boolean isFirst) {
+        skeletonFirstDeath = isFirst;
     }
 
 
