@@ -29,11 +29,6 @@ public class Undead extends Enemy implements Soul {
 		this.setSoulCount(50);
 	}
 
-	@Override
-	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(20, "punches");
-	}
-
 	/**
 	 * At the moment, we only make it can be attacked by enemy that has HOSTILE capability
 	 * You can do something else with this method.
