@@ -53,6 +53,13 @@ public class AttackAction extends Action {
 
 	}
 
+	/***
+	 * This method is used to execute the attack instruction when there is an actor within the adjacent spaces of other
+	 * actors.
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return result, a descriptive message of the damage done by the actor to the target
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		Weapon weapon = actor.getWeapon();
@@ -65,7 +72,7 @@ public class AttackAction extends Action {
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
 		if (!target.isConscious()) {
-			//specific condition check for each skeleton
+			//special condition check for skeleton to give him a 50% chance to revive
 			if (target.getClass() == Skeleton.class) {
 				Skeleton skeleton = (Skeleton) target;
 				if (skeleton.isSkeletonFirstDeath()) {
@@ -77,7 +84,7 @@ public class AttackAction extends Action {
 						transferSouls(actor,map);
 						result += System.lineSeparator() + target + " is killed.";
 					}
-				} else {
+				} else { //if the target is not a skeleton then it will just proceed as normal when the target is not conscious
 					transferSouls(actor,map);
 					result += System.lineSeparator() + target + " is killed.";
 				}
@@ -90,10 +97,15 @@ public class AttackAction extends Action {
 			}
 
 		}
-
 			return result;
-		}
+	}
 
+
+	/***
+	 * Descriptive message to describe the actor hitting the target in which direction
+	 * @param actor The actor performing the action.
+	 * @return a string of descriptive message
+	 */
 		@Override
 		public String menuDescription (Actor actor){
 			return actor + " attacks " + target + " at " + direction;

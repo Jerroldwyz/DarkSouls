@@ -25,14 +25,18 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Abilities.REST);
 	}
-	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(100, "punches");
-	}
 
 	public int getSoulCount() {
 		return soulCount;
 	}
 
+	/**
+	 * Gets the allowable actions that the other actor can perform unto player
+	 * @param otherActor the Actor that might be performing attack
+	 * @param direction  String representing the direction of the other Actor
+	 * @param map        current GameMap
+	 * @return returns an attack action if there is hostile enemy nearby
+	 */
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
@@ -43,6 +47,14 @@ public class Player extends Actor implements Soul {
 		return actions;
 	}
 
+	/**
+	 * Plays the actor's current turn
+	 * @param actions    collection of possible Actions for this Actor
+	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param map        the map containing the Actor
+	 * @param display    the I/O object to which messages may be written
+	 * @return the console menu
+	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
@@ -54,11 +66,20 @@ public class Player extends Actor implements Soul {
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * Transfers the soul from a soul object to another
+	 * @param soulObject a target souls.
+	 */
 	@Override
 	public void transferSouls(Soul soulObject) {
 		soulObject.addSouls(soulCount);
 	}
 
+	/**
+	 * Adds the souls of the player
+	 * @param souls number of souls to be incremented.
+	 * @return a boolean value to indicate if addition is successful
+	 */
 	@Override
 	public boolean addSouls(int souls) {
 		boolean success = false;

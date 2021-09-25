@@ -13,9 +13,15 @@ import java.util.ArrayList;
  */
 public class Undead extends Enemy implements Soul {
 	// Will need to change this to a collection if Undeads gets additional Behaviours.
+	/**
+	 * An array list to store the behaviours of skeleton such as wander and follow behaviour
+	 */
 	private ArrayList<Behaviour> behaviours = new ArrayList<>();
-	private FollowBehaviour followBehaviour;
 
+	/**
+	 * Declaring a follow behaviour object
+	 */
+	private FollowBehaviour followBehaviour;
 
 	/**
 	 * Constructor.
@@ -29,6 +35,10 @@ public class Undead extends Enemy implements Soul {
 		this.setSoulCount(50);
 	}
 
+	/**
+	 * A getter to get the weapon of the undead
+	 * @return a new intrinsic weapon since ghost does not hold any weapon
+	 */
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(20, "punches");
 	}
@@ -58,11 +68,17 @@ public class Undead extends Enemy implements Soul {
 		return actions;
 	}
 
-	/**
-	 * Figure out what to do next.
-	 * FIXME: An Undead wanders around at random and it cannot attack anyone. Also, figure out how to spawn this creature.
+	/***
 	 *
+	 * Figure out what to do next.
+	 * Loops through the list of behaviours and action list.
 	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
+	 *
+	 * @param actions   the action which is being played the current turn
+	 * @param lastAction not in use
+	 * @param map       used to passed as a parameter
+	 * @param display   displays the Skeleton's current hitpoints out of the maximum hitpoints along with weapon used
+	 * @return the current action
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
