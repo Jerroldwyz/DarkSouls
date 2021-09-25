@@ -1,15 +1,15 @@
 package game;
 
-
 import edu.monash.fit2099.engine.*;
 import game.enums.Status;
 import game.interfaces.Behaviour;
+import game.interfaces.Soul;
 import java.util.ArrayList;
 
 /**
  * An undead minion.
  */
-public class Undead extends Actor {
+public class Undead extends Enemy implements Soul {
 	// Will need to change this to a collection if Undeads gets additional Behaviours.
 	private ArrayList<Behaviour> behaviours = new ArrayList<>();
 	private FollowBehaviour followBehaviour;
@@ -23,8 +23,10 @@ public class Undead extends Actor {
 	public Undead(String name) {
 		super(name, 'u', 50);
 		behaviours.add(new WanderBehaviour());
-		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		setSoulCount(50);
+
 	}
+
 
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -49,7 +51,8 @@ public class Undead extends Actor {
 				this.followBehaviour = new FollowBehaviour(otherActor);
 				behaviours.add(this.followBehaviour);
 			}
-			actions.add(new AttackAction(this,direction));
+			if(!otherActor.hasCapability(Status.DISARMED)){
+				actions.add(new AttackAction(this,direction)); }
 
 		}
 		return actions;
@@ -66,14 +69,16 @@ public class Undead extends Actor {
 		if(!actions.getUnmodifiableActionList().isEmpty()) {
 			for (Action action : actions.getUnmodifiableActionList()) {
 				if (action.getClass() == AttackAction.class) {
+					display.println(this.getClass().getName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using fist");
 					return action;
 				}
 			}
 		}
 
-			for(Behaviour Behaviour : behaviours) {
+		for(Behaviour Behaviour : behaviours) {
 			if (behaviours.contains(followBehaviour)){
 				Action action = followBehaviour.getAction(this, map);
+				display.println("Undead" + " [" + this.maxHitPoints + "/" + this.hitPoints + "] using fist");
 				return action;
 			}
 			Action action = Behaviour.getAction(this, map);
@@ -82,5 +87,6 @@ public class Undead extends Actor {
 		}
 			return new DoNothingAction();
 	}
+
 
 }

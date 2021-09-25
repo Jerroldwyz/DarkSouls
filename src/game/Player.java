@@ -16,6 +16,7 @@ import game.interfaces.Soul;
 public class Player extends Actor implements Soul {
 
 	private final Menu menu = new Menu();
+	private int soulCount = 0;
 
 	/**
 	 * Constructor.
@@ -40,9 +41,14 @@ public class Player extends Actor implements Soul {
 		return actions;
 	}
 
+	public int getSoulCount() {
+		return soulCount;
+	}
+
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
+		display.println(Integer.toString(getSoulCount()));
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
@@ -53,5 +59,14 @@ public class Player extends Actor implements Soul {
 	@Override
 	public void transferSouls(Soul soulObject) {
 		//TODO: transfer Player's souls to another Soul's instance.
+	}
+
+	@Override
+	public boolean addSouls(int souls){
+		boolean success = false;
+		if(souls != 0){
+			soulCount += souls;
+			success = true;}
+		return success;
 	}
 }

@@ -52,6 +52,7 @@ public class AttackAction extends Action {
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
 		if (!target.isConscious()) {
+			target.asSoul().transferSouls(actor.asSoul());
 			Actions dropActions = new Actions();
 			// drop all items
 			for (Item item : target.getInventory())
