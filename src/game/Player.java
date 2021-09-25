@@ -1,11 +1,6 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Menu;
+import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Soul;
@@ -16,6 +11,7 @@ import game.interfaces.Soul;
 public class Player extends Actor implements Soul {
 
 	private final Menu menu = new Menu();
+	private int soulCount = 0;
 
 	/**
 	 * Constructor.
@@ -29,13 +25,16 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Abilities.REST);
 	}
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(100, "punches");
+	}
 
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-			actions.add(new AttackAction(this,direction));
+		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+			actions.add(new AttackAction(this, direction));
 		}
 		return actions;
 	}
@@ -52,6 +51,17 @@ public class Player extends Actor implements Soul {
 
 	@Override
 	public void transferSouls(Soul soulObject) {
-		//TODO: transfer Player's souls to another Soul's instance.
+		soulObject.addSouls(soulCount);
 	}
+
+	@Override
+	public boolean addSouls(int souls) {
+		boolean success = false;
+		if(souls != 0){
+			soulCount += souls;
+			success = true;
+		}
+		return success;
+	}
+
 }

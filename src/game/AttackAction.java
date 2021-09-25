@@ -31,7 +31,7 @@ public class AttackAction extends Action {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param target the Actor to attack
 	 */
 	public AttackAction(Actor target, String direction) {
@@ -41,7 +41,6 @@ public class AttackAction extends Action {
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
-
 		Weapon weapon = actor.getWeapon();
 
 		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
@@ -52,23 +51,38 @@ public class AttackAction extends Action {
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
 		if (!target.isConscious()) {
-			Actions dropActions = new Actions();
-			// drop all items
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction(actor));
-			for (Action drop : dropActions)
-				drop.execute(target, map);
-			// remove actor
-			//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
+			//specific condition check for each skeleton
+			if (target.getClass() == Skeleton.class) {
+				Skeleton skeleton = (Skeleton) target;
+				if (skeleton.isSkeletonFirstDeath()) {
+					Random random = new Random();
+					int randomInt = random.nextInt(100);
+					if (randomInt >= 50) {
+						skeleton.heal(100);
+						skeleton.setSkeletonFirstDeath(false);
+					}
+				} else {
+					target.asSoul().transferSouls(actor.asSoul());
+					Actions dropActions = new Actions();
+					// drop all item
+					for (Item item : target.getInventory())
+						dropActions.add(item.getDropAction(actor));
+					for (Action drop : dropActions)
+						drop.execute(target, map);
+					// remove actor
+					//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
+					map.removeActor(target);
+					result += System.lineSeparator() + target + " is killed.";
+				}
+			}
 		}
 
-		return result;
+			return result;
+		}
+
+		@Override
+		public String menuDescription (Actor actor){
+			return actor + " attacks " + target + " at " + direction;
+		}
 	}
 
-	@Override
-	public String menuDescription(Actor actor) {
-		return actor + " attacks " + target + " at " + direction;
-	}
-}

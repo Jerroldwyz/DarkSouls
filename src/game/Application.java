@@ -3,11 +3,7 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.FancyGroundFactory;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.World;
+import edu.monash.fit2099.engine.*;
 
 /**
  * The main class for the Jurassic World game.
@@ -60,6 +56,11 @@ public class Application {
 			// Place a Hollow in the the map
 			// FIXME: the Undead should be generated from the Cemetery
 			gameMap.at(32, 7).addActor(new Undead("Undead"));
+			gameMap.at(23, 8).addActor(new Skeleton("Skeleton"));
+			gameMap.at(50, 17).addActor(new Skeleton("Skeleton"));
+			gameMap.at(4, 2).addActor(new Skeleton("Skeleton"));
+			gameMap.at(19, 23).addActor(new Skeleton("Skeleton"));
+			gameMap.at(37, 19).addActor(new Skeleton("Skeleton"));
 			world.run();
 
 	}
