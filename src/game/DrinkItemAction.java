@@ -10,11 +10,6 @@ public class DrinkItemAction extends Action {
 
     protected EstusFlask estusFlask;
 
-    /**
-     * Constructor
-     * @param EstusFlask estusFlask to be consumed
-     */
-
     public DrinkItemAction(EstusFlask estusFlask){
         this.estusFlask = estusFlask;
     }
@@ -32,4 +27,4 @@ public class DrinkItemAction extends Action {
     @Override
     public String menuDescription(Actor actor){return actor + " consumes EstusFlask";}
 }
-}
+

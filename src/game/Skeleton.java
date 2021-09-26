@@ -12,6 +12,7 @@ import java.util.Random;
  * A monster that holds either a broadsword or giant axe
  */
 public class Skeleton extends Enemy implements Soul {
+    private Location initLocation;
     /**
      * An array list to store the behaviours of skeleton such as wander and follow behaviour
      */
@@ -50,8 +51,9 @@ public class Skeleton extends Enemy implements Soul {
      *
      * @param name the name of this Skeleton
      */
-    public Skeleton(String name) {
+    public Skeleton(String name, GameMap gameMap, int x, int y) {
         super(name, 's', 100);
+        this.initLocation = new Location(gameMap,x,y);
         behaviours.add(new WanderBehaviour());
         this.setSoulCount(250);
         Random random = new Random();
@@ -62,6 +64,14 @@ public class Skeleton extends Enemy implements Soul {
 //            this.addItemToInventory(GiantAxe);
         }
 
+    }
+
+    public Location getInitLocation() {
+        return initLocation;
+    }
+
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(50, "punches");
     }
 
     /**

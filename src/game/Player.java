@@ -13,6 +13,7 @@ public class Player extends Actor implements Soul {
 	private final Menu menu = new Menu();
 	private int soulCount = 1000;
 	private  Location prevLocation;
+	private EstusFlask estusFlask = new EstusFlask(this);
 
 	/**
 	 * Constructor.
@@ -26,6 +27,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
+		this.addItemToInventory(estusFlask);
 	}
 
 	public void setSoulCount(int soulCount) {
@@ -40,6 +42,10 @@ public class Player extends Actor implements Soul {
 		return soulCount;
 	}
 
+	public int getMaxHitPoints(){
+		return maxHitPoints;
+	}
+
 	/**
 	 * Gets the allowable actions that the other actor can perform unto player
 	 * @param otherActor the Actor that might be performing attack
@@ -51,7 +57,7 @@ public class Player extends Actor implements Soul {
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+		if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
 			actions.add(new AttackAction(this, direction));
 		}
 		return actions;
@@ -93,6 +99,7 @@ public class Player extends Actor implements Soul {
 
 		// return/print the console menu
 		display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
+		display.println("Estus Flask Charges: " + estusFlask.getCharge() + "/3");
 		return menu.showMenu(this, actions, display);
 	}
 
