@@ -48,7 +48,6 @@ public class AttackAction extends Action {
 		for (Action drop : dropActions)
 			drop.execute(target, map);
 		// remove actor
-		//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
 		map.removeActor(target);
 
 	}

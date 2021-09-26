@@ -85,6 +85,7 @@ public class Undead extends Enemy implements Soul {
 		// loop through all behaviours
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
 			map.removeActor(this);
+			return new DoNothingAction();
 		}
 		if (!actions.getUnmodifiableActionList().isEmpty()) {
 			for (Action action : actions.getUnmodifiableActionList()) {

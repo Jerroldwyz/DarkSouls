@@ -11,7 +11,7 @@ import game.interfaces.Soul;
 public class Player extends Actor implements Soul {
 
 	private final Menu menu = new Menu();
-	private int soulCount = 0;
+	private int soulCount = 1000;
 	private  Location prevLocation;
 
 	/**
@@ -25,8 +25,12 @@ public class Player extends Actor implements Soul {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Abilities.REST);
+		this.addCapability(Abilities.PICKUPTOS);
 	}
 
+	public void setSoulCount(int soulCount) {
+		this.soulCount = soulCount;
+	}
 
 	/**
 	 * Gets the soul count of the player
@@ -67,6 +71,10 @@ public class Player extends Actor implements Soul {
 
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
 			hurt(1000);
+			TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", this);
+			this.asSoul().transferSouls(tokenOfSoul.asSoul());
+			display.println(Integer.toString(tokenOfSoul.getSoulCount()));
+			prevLocation.addItem(tokenOfSoul);
 		}
 
 		if(!this.isConscious()){
@@ -95,6 +103,7 @@ public class Player extends Actor implements Soul {
 	@Override
 	public void transferSouls(Soul soulObject) {
 		soulObject.addSouls(soulCount);
+		this.setSoulCount(0);
 	}
 
 	/**

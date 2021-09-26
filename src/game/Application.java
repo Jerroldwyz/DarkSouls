@@ -55,7 +55,7 @@ public class Application {
 
 			// Place a Hollow in the the map
 			// FIXME: the Undead should be generated from the Cemetery
-			gameMap.at(37, 10).addActor(new Undead("Undead"));
+//			gameMap.at(37, 10).addActor(new Undead("Undead"));
 			gameMap.at(23, 8).addActor(new Skeleton("Skeleton"));
 			gameMap.at(50, 17).addActor(new Skeleton("Skeleton"));
 			gameMap.at(4, 2).addActor(new Skeleton("Skeleton"));
