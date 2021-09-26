@@ -2,12 +2,7 @@ package game;
 
 import java.util.Random;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Item;
-import edu.monash.fit2099.engine.Weapon;
+import edu.monash.fit2099.engine.*;
 
 /**
  * Special Action for attacking other Actors.
@@ -99,10 +94,16 @@ public class AttackAction extends Action {
 			}else if(target.getClass() == Undead.class){
 				transferSouls(actor,map);
 				result += System.lineSeparator() + target + " is killed.";
+			}else if(target.getClass() == Player.class){
+				map.moveActor(target, map.at(38,12));
+				target.heal(1000);
+				actor.heal(1000);
+				result += "\n YOU ARE DEAD AND HAS BEEN SENT BACK TO BONFIRE";
 			}
 
+
 		}
-			return result;
+		return result;
 	}
 
 

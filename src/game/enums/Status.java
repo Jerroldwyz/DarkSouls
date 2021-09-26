@@ -6,5 +6,6 @@ package game.enums;
  */
 public enum Status {
     HOSTILE_TO_ENEMY,
-    DISARMED // use this capability to be hostile towards something (e.g., to be attacked by enemy)
+    DISARMED,
+    DEAD // use this capability to be hostile towards something (e.g., to be attacked by enemy)
 }

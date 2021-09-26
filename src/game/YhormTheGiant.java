@@ -8,7 +8,7 @@ import game.interfaces.Soul;
 import java.util.ArrayList;
 
 
-public class YhormTheGiant extends Enemy implements Soul {
+public class YhormTheGiant extends LordOfCinder implements Soul {
     /**
      * An array list to store the behaviours of skeleton such as wander and follow behaviour
      */

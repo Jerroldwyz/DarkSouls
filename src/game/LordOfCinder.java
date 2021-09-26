@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.*;
  * FIXME: This boss is Boring. It does nothing. You need to implement features here.
  * TODO: Could it be an abstract class? If so, why and how?
  */
-public class LordOfCinder extends Actor {
+public abstract class LordOfCinder extends Enemy {
     /**
      * Constructor.
      */
