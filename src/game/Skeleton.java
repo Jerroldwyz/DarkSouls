@@ -98,10 +98,14 @@ public class Skeleton extends Enemy implements Soul {
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         // loop through all behaviours
+        if(map.locationOf(this).getGround().getClass() == Valley.class ){
+            map.removeActor(this);
+        }
+
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
                 if (action.getClass() == AttackAction.class) {
-                    display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                    display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                     return action;
                 }
             }
@@ -110,7 +114,7 @@ public class Skeleton extends Enemy implements Soul {
         for (Behaviour Behaviour : behaviours) {
             if (behaviours.contains(followBehaviour)) {
                 Action action = followBehaviour.getAction(this, map);
-                display.println(this.getClass().getName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                 return action;
             }
             Action action = Behaviour.getAction(this, map);

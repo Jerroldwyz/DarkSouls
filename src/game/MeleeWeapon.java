@@ -16,5 +16,7 @@ public class MeleeWeapon extends WeaponItem {
         super(name, displayChar, damage, verb, hitRate);
     }
 
+
+
     //TODO: please figure out how to disable dropping item action.
 }
