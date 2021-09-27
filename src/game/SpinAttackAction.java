@@ -31,7 +31,6 @@ public class SpinAttackAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-
         String result = actor.getClass().getSimpleName() + " Spin Giant Axe";
         Weapon weapon = actor.getWeapon();
         int damage = weapon.damage() / 2;
@@ -40,7 +39,7 @@ public class SpinAttackAction extends Action {
             Location destination = exit.getDestination();
             if(map.isAnActorAt(destination)) {
                 target = destination.getActor();
-                if(!target.hasCapability(Status.DEAD)){
+                if(!target.hasCapability(Status.DEAD)) {
                     target.hurt(damage);
                 }
                 if (!target.isConscious()) {

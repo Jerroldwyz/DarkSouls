@@ -58,8 +58,10 @@ public class Player extends Actor implements Soul {
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY) && (!this.hasCapability(Status.DEAD))){
-			actions.add(new AttackAction(this, direction));
+		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
+				actions.add(new AttackAction(this, direction));
+		}else{
+			actions.add(new DoNothingAction());
 		}
 		return actions;
 	}
@@ -79,7 +81,6 @@ public class Player extends Actor implements Soul {
 			this.removeCapability(Status.DEAD);
 		}
 
-
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
 			hurt(1000);
 			this.addCapability(Status.DEAD);
@@ -96,8 +97,8 @@ public class Player extends Actor implements Soul {
 			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
 			this.heal(1000);
 			return new DoNothingAction();
-
 		}
+
 		if (lastAction.getNextAction() != null){
 			return lastAction.getNextAction();}
 
@@ -108,6 +109,8 @@ public class Player extends Actor implements Soul {
 		// return/print the console menu
 		display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
 		display.println("Estus Flask Charges: " + estusFlask.getCharge() + "/3");
+
+
 		return menu.showMenu(this, actions, display);
 	}
 
