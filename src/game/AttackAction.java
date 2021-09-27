@@ -82,7 +82,6 @@ public class AttackAction extends Action {
 		}
 
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		target.hurt(damage);
 		if (!target.isConscious()) {
 			//special condition check for skeleton to give him a 50% chance to revive
 			if (target.getClass() == Skeleton.class) {

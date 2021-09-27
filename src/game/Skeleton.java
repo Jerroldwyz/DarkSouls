@@ -112,7 +112,7 @@ public class Skeleton extends Enemy implements Soul {
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         // loop through all behaviours
-        if(map.locationOf(this).getGround().getClass() == Valley.class ){
+        if (map.locationOf(this).getGround().getClass() == Valley.class) {
             map.removeActor(this);
             display.println("SKELETON DROPPED INTO THE VALLEY");
             return new DoNothingAction();
@@ -120,9 +120,9 @@ public class Skeleton extends Enemy implements Soul {
 
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
-                if(action.getClass() == SpinAttackAction.class){
+                if (action.getClass() == SpinAttackAction.class) {
                     int random = rand.nextInt(100);
-                    if(random >= 70){
+                    if (random >= 70) {
                         return action;
                     }
                 }
@@ -130,7 +130,8 @@ public class Skeleton extends Enemy implements Soul {
                     display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                     return action;
                 }
-            }return new DoNothingAction();
+            }
+
         }
 
         for (Behaviour Behaviour : behaviours) {
@@ -142,7 +143,7 @@ public class Skeleton extends Enemy implements Soul {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
-        }
-        return new DoNothingAction();
+
+        }return new DoNothingAction();
     }
 }

@@ -61,9 +61,6 @@ public class Player extends Actor implements Soul {
 		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY) && (!this.hasCapability(Status.DEAD))){
 			actions.add(new AttackAction(this, direction));
 		}
-		else{
-			actions.add(new DoNothingAction());
-		}
 		return actions;
 	}
 
@@ -99,6 +96,7 @@ public class Player extends Actor implements Soul {
 			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
 			this.heal(1000);
 			return new DoNothingAction();
+
 		}
 		if (lastAction.getNextAction() != null){
 			return lastAction.getNextAction();}
