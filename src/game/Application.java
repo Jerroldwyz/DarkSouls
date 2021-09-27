@@ -6,8 +6,7 @@ import java.util.List;
 import edu.monash.fit2099.engine.*;
 
 /**
- * The main class for the Jurassic World game.
- *
+ * The main class that runs Dark Souls 3 Rouge game.
  */
 public class Application {
 

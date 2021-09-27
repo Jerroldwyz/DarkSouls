@@ -23,7 +23,8 @@ public class RestAction extends Action{
 
         //if player's hp is below zero
         if (map.locationOf(actor).getGround().getClass() == Bonfire.class ){
-            map.moveActor(actor, map.at(38,12));}
+            map.moveActor(actor, map.at(38,12));
+        }
 
         Player player = (Player) actor;
         player.heal(1000);
@@ -31,7 +32,7 @@ public class RestAction extends Action{
         result += " took a good rest";
         return result;
 
-        }
+    }
         //return String
 
     @Override

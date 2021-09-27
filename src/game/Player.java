@@ -9,7 +9,7 @@ import game.interfaces.Soul;
  * Class representing the Player.
  */
 public class Player extends Actor implements Soul {
-
+    
 	private final Menu menu = new Menu();
 	private int soulCount = 1000;
 	private  Location prevLocation;

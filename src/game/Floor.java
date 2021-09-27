@@ -21,6 +21,7 @@ public class Floor extends Ground {
 				if (item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
 					pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
 					actions.add(pickUpTOSAction);
+					return actions;
 				}
 			}
 		}

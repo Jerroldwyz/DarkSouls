@@ -19,8 +19,9 @@ public class Dirt extends Ground {
 		if(pickUpTOSAction == null) {
 			for (Item item : destination.getItems()) {
 				if (item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
-					pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
+					pickUpTOSAction = new PickUpTOSAction((TokenOfSoul)item);
 					actions.add(pickUpTOSAction);
+					return actions;
 				}
 			}
 		}
