@@ -57,7 +57,7 @@ public class Application {
 			// FIXME: the Undead should be generated from the Cemetery
 //			gameMap.at(37, 10).addActor(new Undead("Undead"));
 			gameMap.at(38, 11).addActor(new Skeleton("Skeleton",gameMap,38, 11));
-			gameMap.at(39, 1).addActor(new Skeleton("Skeleton",gameMap,39, 1));
+			gameMap.at(38, 13).addActor(new Skeleton("Skeleton",gameMap,39, 1));
 			gameMap.at(30, 2).addActor(new Skeleton("Skeleton",gameMap,30, 2));
 			gameMap.at(30, 3).addActor(new Skeleton("Skeleton",gameMap, 30, 3));
 //			gameMap.at(39, 19).addActor(new Skeleton("Skeleton"));

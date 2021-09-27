@@ -44,6 +44,7 @@ public class Skeleton extends Enemy implements Soul {
         skeletonFirstDeath = isFirst;
     }
 
+    protected Random rand = new Random();
 
     /**
      * Constructor.
@@ -58,6 +59,7 @@ public class Skeleton extends Enemy implements Soul {
         this.setSoulCount(250);
         Random random = new Random();
         int randomInt = random.nextInt(100);
+        this.addItemToInventory(new GiantAxe());
         if(randomInt < 50){
 //            this.addItemToInventory(new Broadsword());
         }else{
@@ -117,6 +119,12 @@ public class Skeleton extends Enemy implements Soul {
 
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
+                if(action.getClass() == SpinAttackAction.class){
+                    int random = rand.nextInt(100);
+                    if(random >= 70){
+                        return action;
+                    }
+                }
                 if (action.getClass() == AttackAction.class) {
                     display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                     return action;

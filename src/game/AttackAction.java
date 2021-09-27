@@ -88,7 +88,7 @@ public class AttackAction extends Action {
 				Skeleton skeleton = (Skeleton) target;
 				if (skeleton.isSkeletonFirstDeath()) {
 					int randomInt = rand.nextInt(100);
-					if (randomInt >= 0) {
+					if (randomInt >= 50) {
 						skeleton.heal(1000);
 						skeleton.setSkeletonFirstDeath(false);
 						result += System.lineSeparator() + target + " is revived.";
@@ -108,7 +108,7 @@ public class AttackAction extends Action {
 				result += System.lineSeparator() + target + " is killed.";
 			}else if(target.getClass() == Player.class){
 				TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target);
-				tokenOfSoul.asSoul().transferSouls(tokenOfSoul.asSoul());
+				target.asSoul().transferSouls(tokenOfSoul.asSoul());
 				map.locationOf(target).addItem(tokenOfSoul);
 				map.moveActor(target, map.at(38,12));
 				if(actor.getClass() == Skeleton.class){
