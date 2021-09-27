@@ -29,6 +29,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
 		this.addItemToInventory(new GiantAxe());
+		this.addCapability(Abilities.TOENTERFLOOR);
 	}
 
 	public void setSoulCount(int soulCount) {
@@ -45,6 +46,10 @@ public class Player extends Actor implements Soul {
 
 	public int getMaxHitPoints(){
 		return maxHitPoints;
+	}
+
+	public EstusFlask getEstusFlask() {
+		return estusFlask;
 	}
 
 	/**
