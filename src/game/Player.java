@@ -31,6 +31,7 @@ public class Player extends Actor implements Soul {
 		this.addItemToInventory(new GiantAxe());
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
+		this.addCapability(Abilities.PICKUPSTORMRULER);
 	}
 
 	public void setSoulCount(int soulCount) {
@@ -64,7 +65,7 @@ public class Player extends Actor implements Soul {
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
+		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY) && !otherActor.hasCapability(Status.STUNNED)){
 				actions.add(new AttackAction(this, direction));
 		}else{
 			actions.add(new DoNothingAction());
@@ -83,8 +84,31 @@ public class Player extends Actor implements Soul {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
+		Location here = map.locationOf(this);
+		if(StormRuler.getAbility() == Abilities.WINDSLASH){
+			display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(FULLY CHARGED), " + this.getSoulCount() + " souls.");
+		}
 		if(this.hasCapability(Status.DEAD)){
 			this.removeCapability(Status.DEAD);
+		}else if(this.hasCapability(Status.DISARMED)){
+			StormRuler.setCharge(StormRuler.getCharge()+1);
+			display.println("Storm ruler is charging for round" + (StormRuler.getCharge()));
+			if(StormRuler.getCharge() == 3){
+				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(charging last round), " + this.getSoulCount() + " souls.");
+			}
+			for(Exit exit : here.getExits()){
+				Location destination = exit.getDestination();
+				if(map.isAnActorAt(destination)) {
+					if(StormRuler.getCharge() == 3) {
+						if (map.getActorAt(destination).getClass() == YhormTheGiant.class) {
+							StormRuler.setSkill(Abilities.WINDSLASH);
+							StormRuler.setCharge(0);
+							this.removeCapability(Status.DISARMED);
+						}
+					}
+				}
+			}
+
 		}
 
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
@@ -109,11 +133,15 @@ public class Player extends Actor implements Soul {
 			return lastAction.getNextAction();}
 
 		prevLocation = map.locationOf(this);
-		display.println(Integer.toString(prevLocation.x()));
-		display.println(Integer.toString(prevLocation.y()));
 
 		// return/print the console menu
-		display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
+		if(this.getWeapon().getClass() == StormRuler.class){
+			if(StormRuler.getCharge() > 0 && StormRuler.getCharge() != 3){
+				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(charging) , " + this.getSoulCount() + " souls.");
+			}
+		}else {
+			display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
+		}
 		display.println("Estus Flask Charges: " + estusFlask.getCharge() + "/3");
 
 

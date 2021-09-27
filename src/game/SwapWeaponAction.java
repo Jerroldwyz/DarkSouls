@@ -11,13 +11,14 @@ import java.util.List;
  * TODO: you may update this code if required.
  */
 public class SwapWeaponAction extends PickUpItemAction {
-
+    private Item weapon;
     /**
      * Constructor
      * @param weapon the new item that will replace the weapon in the Actor's inventory.
      */
     public SwapWeaponAction(Item weapon){
         super(weapon);
+        this.weapon = weapon;
     }
 
     @Override
@@ -30,6 +31,18 @@ public class SwapWeaponAction extends PickUpItemAction {
             if(item.asWeapon() != null){
                 actor.removeItemFromInventory(item);
                 break; // after it removes that weapon, break the loop.
+            }
+        }
+        String result = "";
+        Location here = map.locationOf(actor);
+
+        for(Exit exit : here.getExits()){
+            Location location = exit.getDestination();
+            if(location.getItems().contains(item)){
+                location.removeItem(item);
+                Dirt dirt = (Dirt)location.getGround();
+                dirt.setActions(new Actions());
+                result += item + " has been picked up";
             }
         }
 

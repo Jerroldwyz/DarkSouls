@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 
 public class YhormTheGiant extends LordOfCinder implements Soul {
+
     /**
      * An array list to store the behaviours of skeleton such as wander and follow behaviour
      */
@@ -50,7 +51,9 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
                 this.followBehaviour = new FollowBehaviour(otherActor);
                 behaviours.add(this.followBehaviour);
             }
-            actions.add(new AttackAction(this, direction));
+            if(!otherActor.hasCapability(Status.DISARMED)) {
+                actions.add(new AttackAction(this, direction));
+            }
 
         }
         return actions;
@@ -64,11 +67,17 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+        if(this.hasCapability(Status.STUNNED)){
+            this.removeCapability(Status.STUNNED);
+            display.println(this + " is stunned this turn [" + this.hitPoints + "/" + this.maxHitPoints + "]");
+            return new DoNothingAction();
+        }
+
         // loop through all behaviours
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
                 if (action.getClass() == AttackAction.class) {
-                    display.println(this.getClass().getName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                    display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
                     return action;
                 }
             }
@@ -77,12 +86,15 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
         for (Behaviour Behaviour : behaviours) {
             if (behaviours.contains(followBehaviour)) {
                 Action action = followBehaviour.getAction(this, map);
-                display.println(this.getClass().getName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
-                return action;
+                display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                if (action != null){
+                    return action;
+                }
             }
             Action action = Behaviour.getAction(this, map);
-            if (action != null)
+            if (action != null){
                 return action;
+            }
         }
         return new DoNothingAction();
     }

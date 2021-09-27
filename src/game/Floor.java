@@ -16,7 +16,7 @@ public class Floor extends Ground {
 
 	@Override
 	public Actions allowableActions(Actor actor, Location destination, String direction) {
-		if (!destination.getItems().isEmpty()) {
+		if(!destination.getItems().isEmpty()){
 			for (Item item : destination.getItems()) {
 				pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
 				if (item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
@@ -24,9 +24,9 @@ public class Floor extends Ground {
 					return actions;
 				}
 			}
-		}return actions;
+		}
+		return actions;
 	}
-
 
 	public void setActions(Actions actions) {
 		this.actions = actions;
