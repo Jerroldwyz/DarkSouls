@@ -3,6 +3,7 @@ package game;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Status;
 
 /**
  * Special Action for attacking other Actors.
@@ -88,7 +89,7 @@ public class AttackAction extends Action {
 				Skeleton skeleton = (Skeleton) target;
 				if (skeleton.isSkeletonFirstDeath()) {
 					int randomInt = rand.nextInt(100);
-					if (randomInt >= 0) {
+					if (randomInt >= 50) {
 						skeleton.heal(1000);
 						skeleton.setSkeletonFirstDeath(false);
 						result += System.lineSeparator() + target + " is revived.";
@@ -107,13 +108,18 @@ public class AttackAction extends Action {
 				transferSouls(actor,map);
 				result += System.lineSeparator() + target + " is killed.";
 			}else if(target.getClass() == Player.class){
+				target.addCapability(Status.DEAD);
 				TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target);
-				tokenOfSoul.asSoul().transferSouls(tokenOfSoul.asSoul());
+				target.asSoul().transferSouls(tokenOfSoul.asSoul());
 				map.locationOf(target).addItem(tokenOfSoul);
 				map.moveActor(target, map.at(38,12));
 				if(actor.getClass() == Skeleton.class){
 					Skeleton skeleton = (Skeleton) actor;
 					map.moveActor(skeleton, map.at(skeleton.getInitLocation().x(),skeleton.getInitLocation().y()));
+				}
+				else if(actor.getClass() == Undead.class){
+					Undead undead = (Undead) actor;
+					map.moveActor(undead, map.at(undead.getInitLocation().x(),undead.getInitLocation().y()));
 				}
 				target.heal(1000);
 				actor.heal(1000);
