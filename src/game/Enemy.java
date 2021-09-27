@@ -18,7 +18,7 @@ public class Enemy extends Actor implements Soul {
      */
     public Enemy(String name, char displayChar, int hitPoints){
         super(name, displayChar, hitPoints);
-        this.addCapability(Status.HOSTILE_TO_ENEMY);
+        this.addCapability(Status.HOSTILE_TO_PLAYER_ONLY);
     }
 
     /**

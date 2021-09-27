@@ -9,6 +9,7 @@ import game.interfaces.Soul;
 public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
     private int soulCount = 0;
     private Actor player;
+    private PickUpTOSAction pickUpTOSAction;
 
     public TokenOfSoul(String name, Actor target){
         super(name, '$', true);
@@ -27,6 +28,8 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
         }
         return flag;
     }
+
+
 
     @Override
     public void transferSouls(Soul soulObject) {
@@ -51,7 +54,10 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
 
     @Override
     public PickUpItemAction getPickUpAction(Actor actor) {
-        return new PickUpTOSAction(this);
+        if(actor.hasCapability(Abilities.PICKUPTOS)){
+            this.pickUpTOSAction = new PickUpTOSAction(this);
+            return pickUpTOSAction;
+        }return null;
     }
 
     /**

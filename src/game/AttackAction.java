@@ -94,7 +94,14 @@ public class AttackAction extends Action {
 				transferSouls(actor,map);
 				result += System.lineSeparator() + target + " is killed.";
 			}else if(target.getClass() == Player.class){
+				TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target);
+				tokenOfSoul.asSoul().transferSouls(tokenOfSoul.asSoul());
+				map.locationOf(target).addItem(tokenOfSoul);
 				map.moveActor(target, map.at(38,12));
+				if(actor.getClass() == Skeleton.class){
+					Skeleton skeleton = (Skeleton) actor;
+					map.moveActor(skeleton, map.at(skeleton.getInitLocation().x(),skeleton.getInitLocation().y()));
+				}
 				target.heal(1000);
 				actor.heal(1000);
 				result += "\n YOU ARE DEAD AND HAS BEEN SENT BACK TO BONFIRE";
