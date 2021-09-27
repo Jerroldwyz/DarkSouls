@@ -61,13 +61,25 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
+
+		int damage;
 		Weapon weapon = actor.getWeapon();
+		if(weapon.getClass() == Broadsword.class){
+			int dealDoubleDmg = rand.nextInt(100);
+			if(dealDoubleDmg >= 80){
+				damage = weapon.damage() * 2;
+			}else{
+				damage = weapon.damage();
+			}
+		}
+		else{
+			damage = weapon.damage();
+		}
 
 		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
 			return actor + " misses " + target + ".";
 		}
 
-		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
 		if (!target.isConscious()) {

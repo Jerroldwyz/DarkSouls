@@ -28,6 +28,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
+		this.addItemToInventory(new Broadsword());
 	}
 
 	public void setSoulCount(int soulCount) {
