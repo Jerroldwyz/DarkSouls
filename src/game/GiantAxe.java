@@ -29,4 +29,7 @@ public class GiantAxe extends MeleeWeapon{
         }return actions.getUnmodifiableActionList();
     }
 
+    public int getSoulPrice() {
+        return soulPrice;
+    }
 }

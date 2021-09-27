@@ -55,10 +55,9 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
     @Override
     public PickUpItemAction getPickUpAction(Actor actor) {
         if(actor.hasCapability(Abilities.PICKUPTOS)){
-            return pickUpTOSAction;
+            return null;
         }return null;
     }
-    
 
     public String toString(){
         return "Token Of Soul";

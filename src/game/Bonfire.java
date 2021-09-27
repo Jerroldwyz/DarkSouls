@@ -31,9 +31,7 @@ public class Bonfire extends Ground{
 
     @Override
     public boolean canActorEnter(Actor actor){
-        if(actor.hasCapability(Abilities.REST)){
-            return true;
-
-        }return false;
+        return actor.hasCapability(Abilities.REST);
     }
 }
+

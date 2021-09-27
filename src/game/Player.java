@@ -30,6 +30,7 @@ public class Player extends Actor implements Soul {
 		this.addItemToInventory(estusFlask);
 		this.addItemToInventory(new GiantAxe());
 		this.addCapability(Abilities.TOENTERFLOOR);
+		this.addCapability(Abilities.BUY);
 	}
 
 	public void setSoulCount(int soulCount) {
@@ -144,4 +145,13 @@ public class Player extends Actor implements Soul {
 		return success;
 	}
 
+	@Override
+	public boolean subtractSouls(int souls) {
+		boolean success = false;
+		if(souls != 0){
+			soulCount -= souls;
+			success = true;
+		}
+		return success;
+	}
 }

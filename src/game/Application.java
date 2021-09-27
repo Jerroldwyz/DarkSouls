@@ -60,6 +60,7 @@ public class Application {
 //			gameMap.at(30, 2).addActor(new Skeleton("Skeleton",gameMap,30, 2));
 //			gameMap.at(30, 3).addActor(new Skeleton("Skeleton",gameMap, 30, 3));
 //			gameMap.at(39, 19).addActor(new Skeleton("Skeleton", gameMap, 39, 19));
+			gameMap.at(37, 11).addActor(new FireKeeper(player));
 			world.run();
 
 	}
