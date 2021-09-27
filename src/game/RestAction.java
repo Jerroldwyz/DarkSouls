@@ -8,12 +8,12 @@ public class RestAction extends Action{
     /**
      * player's reset location
      */
-    private BonFire bonfire;
+    private Bonfire bonfire;
     protected  Player player;
     protected EstusFlask estusFlask;
 
 
-    public RestAction(BonFire bonfire){this.bonfire = bonfire;}
+    public RestAction(Bonfire bonfire){this.bonfire = bonfire;}
 
 
     @Override
@@ -22,16 +22,17 @@ public class RestAction extends Action{
         String result = "The " + actor;
 
         //if player's hp is below zero
-        if (map.locationOf(actor).getGround().getClass() == BonFire.class ){
-            map.moveActor(actor, map.at(38,12));
-            player.heal(100);
-            estusFlask.setCharge(3);
-            result += " took a good rest";
+        if (map.locationOf(actor).getGround().getClass() == Bonfire.class ){
+            map.moveActor(actor, map.at(38,12));}
+
+        Player player = (Player) actor;
+        player.heal(1000);
+        player.getEstusFlask().setCharge(3);
+        result += " took a good rest";
+        return result;
 
         }
         //return String
-        return result;
-    }
 
     @Override
     public String menuDescription(Actor actor){

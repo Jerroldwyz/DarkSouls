@@ -26,4 +26,11 @@ public class Floor extends Ground {
 		}
 		return actions;
 	}
+
+	@Override
+	public boolean canActorEnter(Actor actor) {
+		if(actor.hasCapability(Abilities.TOENTERFLOOR)){
+			return true;
+		}return false;
+	}
 }

@@ -117,29 +117,31 @@ public class Skeleton extends Enemy implements Soul {
             return new DoNothingAction();
         }
 
-        if (!actions.getUnmodifiableActionList().isEmpty()) {
-            for (Action action : actions.getUnmodifiableActionList()) {
-                if (action.getClass() == SpinAttackAction.class) {
-                    int random = rand.nextInt(100);
-                    if (random >= 70) {
-                        return action;
-                    }
-                }
-                if (action.getClass() == AttackAction.class) {
-                    display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
+        for (Action action : actions.getUnmodifiableActionList()) {
+            if (action.getClass() == SpinAttackAction.class) {
+                int random = rand.nextInt(100);
+                if (random >= 70) {
                     return action;
                 }
             }
+            if (action.getClass() == AttackAction.class) {
+                display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
+                    return action;
+
+            }
         }
+
         for (Behaviour Behaviour : behaviours) {
             if (behaviours.contains(followBehaviour)) {
-                Action action1 = followBehaviour.getAction(this, map);
+                Action action = followBehaviour.getAction(this, map);
                 display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
-                return action1;
+                if(action != null){
+                    return action;
+                }
             }
-            Action action2 = Behaviour.getAction(this, map);
-            if (action2 != null){
-                return action2;
+            Action action = Behaviour.getAction(this, map);
+            if (action != null){
+                return action;
             }
         }
         return new DoNothingAction();

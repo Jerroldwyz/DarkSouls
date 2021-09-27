@@ -92,6 +92,7 @@ public class Undead extends Enemy implements Soul {
 		// loop through all behaviours
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
 			map.removeActor(this);
+			display.println("UNDEAD DROPPED INTO THE VALLEY");
 			return new DoNothingAction();
 		}
 		if (!actions.getUnmodifiableActionList().isEmpty()) {
@@ -104,13 +105,15 @@ public class Undead extends Enemy implements Soul {
 		}
 		for (Behaviour Behaviour : behaviours) {
 			if (behaviours.contains(followBehaviour)) {
-				Action action1 = followBehaviour.getAction(this, map);
+				Action action = followBehaviour.getAction(this, map);
 				display.println("Undead" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using fist");
-				return action1;
+				if(action != null){
+					return action;
+				}
 			}
-			Action action2 = Behaviour.getAction(this, map);
-			if (action2 != null){
-				return action2;
+			Action action = Behaviour.getAction(this, map);
+			if (action != null){
+				return action;
 			}
 		}
 
