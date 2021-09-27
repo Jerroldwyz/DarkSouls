@@ -100,19 +100,20 @@ public class Undead extends Enemy implements Soul {
 					display.println("Undead" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using fist");
 					return action;
 				}
-			}return new DoNothingAction();
+			}
 		}
-
 		for (Behaviour Behaviour : behaviours) {
 			if (behaviours.contains(followBehaviour)) {
-				Action action = followBehaviour.getAction(this, map);
+				Action action1 = followBehaviour.getAction(this, map);
 				display.println("Undead" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using fist");
-				return action;
+				return action1;
 			}
-			Action action = Behaviour.getAction(this, map);
-			if (action != null)
-				return action;
+			Action action2 = Behaviour.getAction(this, map);
+			if (action2 != null){
+				return action2;
+			}
 		}
+
 		return new DoNothingAction();
 	}
 }

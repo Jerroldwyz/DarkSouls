@@ -59,11 +59,10 @@ public class Skeleton extends Enemy implements Soul {
         this.setSoulCount(250);
         Random random = new Random();
         int randomInt = random.nextInt(100);
-        this.addItemToInventory(new GiantAxe());
         if(randomInt < 50){
-//            this.addItemToInventory(new Broadsword());
+            this.addItemToInventory(new Broadsword());
         }else{
-//            this.addItemToInventory(GiantAxe);
+            this.addItemToInventory(new GiantAxe());
         }
 
     }
@@ -120,9 +119,9 @@ public class Skeleton extends Enemy implements Soul {
 
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
-                if(action.getClass() == SpinAttackAction.class){
+                if (action.getClass() == SpinAttackAction.class) {
                     int random = rand.nextInt(100);
-                    if(random >= 70){
+                    if (random >= 70) {
                         return action;
                     }
                 }
@@ -130,18 +129,18 @@ public class Skeleton extends Enemy implements Soul {
                     display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                     return action;
                 }
-            }return new DoNothingAction();
+            }
         }
-
         for (Behaviour Behaviour : behaviours) {
             if (behaviours.contains(followBehaviour)) {
-                Action action = followBehaviour.getAction(this, map);
+                Action action1 = followBehaviour.getAction(this, map);
                 display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
-                return action;
+                return action1;
             }
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
+            Action action2 = Behaviour.getAction(this, map);
+            if (action2 != null){
+                return action2;
+            }
         }
         return new DoNothingAction();
     }

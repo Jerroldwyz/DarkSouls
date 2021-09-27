@@ -1,6 +1,8 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Status;
+
 import java.util.Random;
 
 import java.util.ArrayList;
@@ -37,7 +39,9 @@ public class SpinAttackAction extends Action {
             Location destination = exit.getDestination();
             if(map.isAnActorAt(destination)) {
                 target = destination.getActor();
-                target.hurt(damage);
+                if(!target.hasCapability(Status.DEAD)) {
+                    target.hurt(damage);
+                }
                 if (!target.isConscious()) {
                     //special condition check for skeleton to give him a 50% chance to revive
                     if (target.getClass() == Skeleton.class) {
@@ -63,6 +67,7 @@ public class SpinAttackAction extends Action {
                         transferSouls(actor,map);
                         result += System.lineSeparator() + target + " is killed.";
                     }else if(target.getClass() == Player.class){
+                        target.addCapability(Status.DEAD);
                         TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target);
                         target.asSoul().transferSouls(tokenOfSoul.asSoul());
                         map.locationOf(target).addItem(tokenOfSoul);

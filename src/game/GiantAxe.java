@@ -7,6 +7,8 @@ import game.enums.Abilities;
 
 import java.util.List;
 
+import game.enums.Abilities;
+
 public class GiantAxe extends MeleeWeapon{
 
     private int soulPrice = 1000;
@@ -16,6 +18,7 @@ public class GiantAxe extends MeleeWeapon{
 
     public GiantAxe() {
         super("GiantAxe", 'A', 50, "hits", 80);
+        this.addCapability(Abilities.CASTSPIN);
     }
 
     @Override
