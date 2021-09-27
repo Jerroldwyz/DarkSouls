@@ -59,19 +59,21 @@ public class Skeleton extends Enemy implements Soul {
         Random random = new Random();
         int randomInt = random.nextInt(100);
         if(randomInt < 50){
-//            this.addItemToInventory(BroadSword);
+//            this.addItemToInventory(new Broadsword());
         }else{
 //            this.addItemToInventory(GiantAxe);
         }
 
     }
 
+
+
     public Location getInitLocation() {
         return initLocation;
     }
 
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(50, "punches");
+        return new IntrinsicWeapon(10, "punches");
     }
 
     /**
