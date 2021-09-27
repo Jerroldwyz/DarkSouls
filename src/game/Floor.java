@@ -16,19 +16,17 @@ public class Floor extends Ground {
 
 	@Override
 	public Actions allowableActions(Actor actor, Location destination, String direction) {
-		if(pickUpTOSAction == null) {
-			if(!destination.getItems().isEmpty()){
-				for (Item item : destination.getItems()) {
-					pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
-					if (item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
-						actions.add(pickUpTOSAction);
-						return actions;
-					}
+		if (!destination.getItems().isEmpty()) {
+			for (Item item : destination.getItems()) {
+				pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
+				if (item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
+					actions.add(pickUpTOSAction);
+					return actions;
 				}
 			}
-		}
-		return actions;
+		}return actions;
 	}
+
 
 	public void setActions(Actions actions) {
 		this.actions = actions;

@@ -47,6 +47,6 @@ public class PickUpTOSAction extends PickUpItemAction {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " holds up the " + tokenOfSoul;
+        return actor + " picks up the " + tokenOfSoul;
     }
 }
