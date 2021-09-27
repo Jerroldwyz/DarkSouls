@@ -88,9 +88,10 @@ public class AttackAction extends Action {
 				Skeleton skeleton = (Skeleton) target;
 				if (skeleton.isSkeletonFirstDeath()) {
 					int randomInt = rand.nextInt(100);
-					if (randomInt >= 50) {
-						skeleton.heal(100);
+					if (randomInt >= 0) {
+						skeleton.heal(1000);
 						skeleton.setSkeletonFirstDeath(false);
+						result += System.lineSeparator() + target + " is revived.";
 					}else{
 						transferSouls(actor,map);
 						result += System.lineSeparator() + target + " is killed.";

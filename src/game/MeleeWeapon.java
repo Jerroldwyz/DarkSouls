@@ -1,5 +1,7 @@
 package game;
 
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.DropItemAction;
 import edu.monash.fit2099.engine.WeaponItem;
 
 public class MeleeWeapon extends WeaponItem {
@@ -16,7 +18,10 @@ public class MeleeWeapon extends WeaponItem {
         super(name, displayChar, damage, verb, hitRate);
     }
 
-
+    @Override
+    public DropItemAction getDropAction(Actor actor) {
+        return null;
+    }
 
     //TODO: please figure out how to disable dropping item action.
 }

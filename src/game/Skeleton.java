@@ -66,6 +66,8 @@ public class Skeleton extends Enemy implements Soul {
 
     }
 
+
+
     public Location getInitLocation() {
         return initLocation;
     }
