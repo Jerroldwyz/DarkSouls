@@ -58,8 +58,11 @@ public class Player extends Actor implements Soul {
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
+		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY) && (!this.hasCapability(Status.DEAD))){
 			actions.add(new AttackAction(this, direction));
+		}
+		else{
+			actions.add(new DoNothingAction());
 		}
 		return actions;
 	}
@@ -75,9 +78,14 @@ public class Player extends Actor implements Soul {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
+		if(this.hasCapability(Status.DEAD)){
+			this.removeCapability(Status.DEAD);
+		}
+
 
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
 			hurt(1000);
+			this.addCapability(Status.DEAD);
 			TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", this);
 			this.asSoul().transferSouls(tokenOfSoul.asSoul());
 			display.println(Integer.toString(tokenOfSoul.getSoulCount()));
@@ -86,9 +94,10 @@ public class Player extends Actor implements Soul {
 
 		if(!this.isConscious()){
 			map.moveActor(this, map.at(38,12));
+			display.println("YOU DROPPED INTO THE VALLEY");
+			display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
+			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
 			this.heal(1000);
-			display.println("YOU ARE DEAD AND YOU ARE SENT BACK TO BONFIRE");
-			display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
 			return new DoNothingAction();
 		}
 		if (lastAction.getNextAction() != null){

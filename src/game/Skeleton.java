@@ -114,6 +114,7 @@ public class Skeleton extends Enemy implements Soul {
         // loop through all behaviours
         if(map.locationOf(this).getGround().getClass() == Valley.class ){
             map.removeActor(this);
+            display.println("SKELETON DROPPED INTO THE VALLEY");
             return new DoNothingAction();
         }
 
@@ -129,7 +130,7 @@ public class Skeleton extends Enemy implements Soul {
                     display.println("Skeleton" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                     return action;
                 }
-            }
+            }return new DoNothingAction();
         }
 
         for (Behaviour Behaviour : behaviours) {

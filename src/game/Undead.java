@@ -18,6 +18,8 @@ public class Undead extends Enemy implements Soul {
 	 */
 	private ArrayList<Behaviour> behaviours = new ArrayList<>();
 
+	private Location initLocation;
+
 	/**
 	 * Declaring a follow behaviour object
 	 */
@@ -29,10 +31,15 @@ public class Undead extends Enemy implements Soul {
 	 *
 	 * @param name the name of this Undead
 	 */
-	public Undead(String name) {
+	public Undead(String name, GameMap gameMap, int x, int y) {
 		super(name, 'U', 50);
+		this.initLocation = new Location(gameMap,x,y);
 		behaviours.add(new WanderBehaviour());
 		this.setSoulCount(50);
+	}
+
+	public Location getInitLocation() {
+		return initLocation;
 	}
 
 	/**
@@ -93,7 +100,7 @@ public class Undead extends Enemy implements Soul {
 					display.println("Undead" + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using fist");
 					return action;
 				}
-			}
+			}return new DoNothingAction();
 		}
 
 		for (Behaviour Behaviour : behaviours) {
