@@ -8,5 +8,6 @@ public enum Status {
     HOSTILE_TO_ENEMY,
     DISARMED,
     DEAD,
-    HOSTILE_TO_PLAYER_ONLY // use this capability to be hostile towards something (e.g., to be attacked by enemy)
+    HOSTILE_TO_PLAYER_ONLY,
+    STUNNED// use this capability to be hostile towards something (e.g., to be attacked by enemy)
 }

@@ -65,7 +65,7 @@ public class AttackAction extends Action {
 
 		int damage;
 		Weapon weapon = actor.getWeapon();
-		if(weapon.getClass() == Broadsword.class){
+		if(weapon.getClass() == Broadsword.class || weapon.getClass() == StormRuler.class){
 			int dealDoubleDmg = rand.nextInt(100);
 			if(dealDoubleDmg >= 80){
 				damage = weapon.damage() * 2;

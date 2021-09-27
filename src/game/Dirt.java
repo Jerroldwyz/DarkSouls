@@ -9,6 +9,7 @@ import game.enums.Abilities;
 public class Dirt extends Ground {
 	private Actions actions = new Actions();
 	private PickUpTOSAction pickUpTOSAction;
+	private SwapWeaponAction swapWeaponAction;
 
 	public Dirt() {
 		super('.');
@@ -16,14 +17,19 @@ public class Dirt extends Ground {
 
 	@Override
 	public Actions allowableActions(Actor actor, Location destination, String direction) {
-		if(pickUpTOSAction == null) {
-			if(!destination.getItems().isEmpty()){
-				for (Item item : destination.getItems()) {
+		if(!destination.getItems().isEmpty()){
+			for (Item item : destination.getItems()) {
+				if(item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
 					pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
-					if (item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
-						actions.add(pickUpTOSAction);
-						return actions;
+					actions.add(pickUpTOSAction);
+					return actions;
+				} else if(item.getClass() == StormRuler.class && actor.hasCapability(Abilities.PICKUPSTORMRULER)){
+					//if its not token of soul its storm ruler
+					if(swapWeaponAction == null) {
+						swapWeaponAction = new SwapWeaponAction(item);
+						actions.add(swapWeaponAction);
 					}
+					return actions;
 				}
 			}
 		}

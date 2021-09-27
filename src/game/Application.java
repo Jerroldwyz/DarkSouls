@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 
 /**
  * The main class for the Jurassic World game.
@@ -48,7 +49,8 @@ public class Application {
 			world.addGameMap(gameMap);
 
 			Actor player = new Player("Unkindled (Player)", '@', 100);
-			world.addPlayer(player, gameMap.at(38, 12));
+			//38, 12
+			world.addPlayer(player, gameMap.at(7, 24));
 
 			// Place Yhorm the Giant/boss in the map
 			gameMap.at(6, 25).addActor(new YhormTheGiant("Yhorm the Giant"));
@@ -62,6 +64,7 @@ public class Application {
 //			gameMap.at(30, 3).addActor(new Skeleton("Skeleton",gameMap, 30, 3));
 //			gameMap.at(39, 19).addActor(new Skeleton("Skeleton", gameMap, 39, 19));
 			gameMap.at(37, 11).addActor(new FireKeeper(player));
+			gameMap.at(7,25).addItem(new StormRuler(Abilities.CHARGE));
 			world.run();
 
 	}
