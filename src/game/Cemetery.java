@@ -30,7 +30,7 @@ public class Cemetery extends Ground {
 
     /**
      * Check whether the actor can enter cemetery or not.
-     * @param actor The actor performing the action.
+     * @param location The location of actor performing the action.
      * @return false
      */
     @Override

@@ -118,7 +118,7 @@ public class Undead extends Enemy implements Soul {
 			}
 			Random rand = new Random();
 			int chanceToDie = rand.nextInt(100);
-			if(chanceToDie >= 0){
+			if(chanceToDie >= 90){
 				map.removeActor(this);
 				display.println(this + " will die next round");
 				return new DoNothingAction();
