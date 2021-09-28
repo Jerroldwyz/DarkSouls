@@ -1,13 +1,18 @@
 package game;
 
 import java.util.Random;
-
 import edu.monash.fit2099.engine.*;
 import game.enums.Status;
 
 /**
  * Special Action for attacking other Actors.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Action
  */
+
 public class AttackAction extends Action {
 
 	/**
@@ -53,7 +58,7 @@ public class AttackAction extends Action {
 
 	}
 
-	/***
+	/**
 	 * This method is used to execute the attack instruction when there is an actor within the adjacent spaces of other
 	 * actors.
 	 * @param actor The actor performing the action.
@@ -131,7 +136,7 @@ public class AttackAction extends Action {
 	}
 
 
-	/***
+	/**
 	 * Descriptive message to describe the actor hitting the target in which direction
 	 * @param actor The actor performing the action.
 	 * @return a string of descriptive message

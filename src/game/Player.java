@@ -150,6 +150,8 @@ public class Player extends Actor implements Soul {
 		return menu.showMenu(this, actions, display);
 	}
 
+
+
 	/**
 	 * Transfers the soul from a soul object to another
 	 * @param soulObject a target souls.

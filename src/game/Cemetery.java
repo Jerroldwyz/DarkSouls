@@ -8,16 +8,31 @@ import edu.monash.fit2099.engine.Location;
 import java.util.Random;
 
 /**
- * Class representing the cemetry.
+ * Class representing the cemetery.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Ground
  */
+
 public class Cemetery extends Ground {
     private Undead undead;
     Random rand = new Random();
 
+    /**
+     * Constructor.
+     *
+     */
     public Cemetery() {
         super('C');
     }
 
+    /**
+     * Check whether the actor can enter cemetery or not.
+     * @param actor The actor performing the action.
+     * @return false
+     */
     @Override
     public void tick(Location location) {
         boolean add = false;
@@ -38,9 +53,12 @@ public class Cemetery extends Ground {
         }
     }
 
+    /**
+     *?????????????????????????????????????????????????
+     * @return false
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return false;
     }
-
 }

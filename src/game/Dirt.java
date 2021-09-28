@@ -4,17 +4,46 @@ import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
 
 /**
- * A class that represents bare dirt.
+ * SA class that represents bare dirt.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Action
  */
+
 public class Dirt extends Ground {
+    /**
+     * The object of the Actions class.
+     */
 	private Actions actions = new Actions();
+
+	/**
+     * The object of the PickUpToSAction class.
+     */
 	private PickUpTOSAction pickUpTOSAction;
+
+	/**
+     * The object of the SwapWeaponAction class.
+     */
 	private SwapWeaponAction swapWeaponAction;
 
+    /**
+	 * Constructor.
+	 *
+	 */
 	public Dirt() {
 		super('.');
 	}
 
+    /**
+	 * Check whether the item on the floor is a token of souls or weapons if it is a tokenofsoul
+	 *the then pickUpTOSAction is added into actions list else it will be swapWeaponAction. If there are no item
+	 * drop on the floor no action will be added into the actions list.
+	 * @param actor The actor performing the action.
+	 * @param destination The location where the item at.
+	 * @return a new action is added to the actions list or no action is added.
+	 */
 	@Override
 	public Actions allowableActions(Actor actor, Location destination, String direction) {
 		if(!destination.getItems().isEmpty()){
@@ -36,6 +65,10 @@ public class Dirt extends Ground {
 		return actions;
 	}
 
+    /**
+     * A setter that changes the object actions in Actions class.
+     * @param actions The actions object in Actions class.
+     */
 	public void setActions(Actions actions) {
 		this.actions = actions;
 	}

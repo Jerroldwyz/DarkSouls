@@ -4,6 +4,11 @@ import edu.monash.fit2099.engine.Actor;
 
 /**
  * A class for Broadsword weapon.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see MeleeWeapon
  */
 public class Broadsword extends MeleeWeapon{
 
