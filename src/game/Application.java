@@ -8,7 +8,11 @@ import game.enums.Abilities;
 
 /**
  * The main class that runs Dark Souls 3 Rouge game.
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
  */
+
 public class Application {
 
 	public static void main(String[] args) {

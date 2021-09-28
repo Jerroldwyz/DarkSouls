@@ -1,17 +1,37 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-
 import java.util.List;
 
+/**
+ * A class for the player to buy weapons from the FireKeeper.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Action
+ */
+
 public class BuyAction extends Action {
+
+    /**
+     * All the weapons exist in the game abstract from Item class.
+     */
     private Item weapon;
 
+    /**
+     * Constructor.
+     *
+     * @param weapon All the weapon in the game.
+     */
     public BuyAction(Item weapon){
         this.weapon = weapon;
-
     }
 
+    /**
+     * @param actor The player performing the action.
+     * @return a string of descriptive message
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Player player = (Player) actor;
@@ -55,9 +75,12 @@ public class BuyAction extends Action {
         return result;
     }
 
+    /**
+     * @param actor The actor performing the action.
+     * @return a string showing what weapon has the player bought.
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " buys " + weapon.getClass().getSimpleName();
     }
-
 }
