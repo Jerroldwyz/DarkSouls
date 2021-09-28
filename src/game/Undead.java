@@ -2,11 +2,13 @@ package game;
 
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 import game.interfaces.Soul;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * An undead minion.
@@ -36,6 +38,7 @@ public class Undead extends Enemy implements Soul {
 		this.initLocation = new Location(gameMap,x,y);
 		behaviours.add(new WanderBehaviour());
 		this.setSoulCount(50);
+		this.addCapability(Abilities.TOENTERVALLEY);
 	}
 
 	public Location getInitLocation() {
@@ -47,7 +50,7 @@ public class Undead extends Enemy implements Soul {
 	 * @return a new intrinsic weapon since ghost does not hold any weapon
 	 */
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(50, "punches");
+		return new IntrinsicWeapon(20, "punches");
 	}
 
 	/**
@@ -112,6 +115,13 @@ public class Undead extends Enemy implements Soul {
 				if(action != null){
 					return action;
 				}
+			}
+			Random rand = new Random();
+			int chanceToDie = rand.nextInt(100);
+			if(chanceToDie >= 90){
+				map.removeActor(this);
+				display.println(this + " will die next round");
+				return new DoNothingAction();
 			}
 			Action action = Behaviour.getAction(this, map);
 			if (action != null){

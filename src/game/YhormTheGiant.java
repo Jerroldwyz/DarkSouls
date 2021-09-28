@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 import game.interfaces.Soul;
@@ -64,6 +65,10 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
             }
             if (!otherActor.hasCapability(Status.DISARMED)) {
                 actions.add(new AttackAction(this, direction));
+            }
+            if(otherActor.getWeapon().getClass() == StormRuler.class && StormRuler.getAbility() == Abilities.WINDSLASH){
+                actions.add(new StormRulerAction((StormRuler) otherActor.getWeapon(), Abilities.WINDSLASH));
+                StormRuler.setStormRulerAction();
             }
 
         }
