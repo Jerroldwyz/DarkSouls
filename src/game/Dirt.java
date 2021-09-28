@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
 
 /**
- * SA class that represents bare dirt.
+ * A class that represents bare dirt.
  *
  * @author Ng Kai Yi
  * @author Jerrold Wong Youn Zhuet

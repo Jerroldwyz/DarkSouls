@@ -7,12 +7,33 @@ import game.interfaces.Soul;
 
 /**
  * Class representing the Player.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Actor
  */
+
 public class Player extends Actor implements Soul {
-    
+
+	/**
+	 * The menu for the game
+	 */
 	private final Menu menu = new Menu();
+
+	/**
+	 * The soulCount within the player.
+	 */
 	private int soulCount = 0;
+
+	/**
+	 * The player's location
+	 */
 	private Location prevLocation;
+
+	/**
+	 * The Attributes of estusFlask.
+	 */
 	private EstusFlask estusFlask = new EstusFlask(this);
 
 	/**
@@ -35,6 +56,10 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.TOENTERVALLEY);
 	}
 
+	/**
+	 * The setter for soulCount where changes the value of soulCount.
+	 * @param soulCount
+	 */
 	public void setSoulCount(int soulCount) {
 		this.soulCount = soulCount;
 	}
@@ -47,10 +72,18 @@ public class Player extends Actor implements Soul {
 		return soulCount;
 	}
 
+	/**
+	 * The getter for player max hp
+	 * @return player's max hp
+	 */
 	public int getMaxHitPoints(){
 		return maxHitPoints;
 	}
 
+	/**
+	 * The getter for estusFlask
+	 * @return estusFlask's Attributes
+	 */
 	public EstusFlask getEstusFlask() {
 		return estusFlask;
 	}
@@ -179,6 +212,11 @@ public class Player extends Actor implements Soul {
 		return success;
 	}
 
+	/**
+	 * substract the souls of the player
+	 * @param souls number of souls to be reduced.
+	 * @return a boolean value to indicate if reduction is successful.
+	 */
 	@Override
 	public boolean subtractSouls(int souls) {
 		boolean success = false;

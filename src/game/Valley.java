@@ -8,9 +8,19 @@ import game.enums.Abilities;
 
 /**
  * The gorge or endless gap that is dangerous for the Player.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 1
+ * @see Ground
  */
+
 public class Valley extends Ground {
 
+	/**
+	 * Constructor.
+	 *
+	 */
 	public Valley() {
 		super('+');
 	}

@@ -4,6 +4,15 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.DropItemAction;
 import edu.monash.fit2099.engine.WeaponItem;
 
+/**
+ * A class for all the melee weapons.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see WeaponItem
+ */
+
 public class MeleeWeapon extends WeaponItem {
     /**
      * Constructor.
@@ -18,6 +27,11 @@ public class MeleeWeapon extends WeaponItem {
         super(name, displayChar, damage, verb, hitRate);
     }
 
+    /**
+     * All weapons cannot be dropped on the floor.
+     * @Param actor the player
+     * @return null
+     */
     @Override
     public DropItemAction getDropAction(Actor actor) {
         return null;

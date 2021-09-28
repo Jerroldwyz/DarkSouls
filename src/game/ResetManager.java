@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * A reset class where iterates all the instances initiated in this game.
+ *
+ * @version 1
+ */
+
+/**
  * A global Singleton manager that does soft-reset on the instances.
  * TODO: you may modify (add or remove) methods in this class if you think they are not necessary.
  * HINT: refer to Bootcamp Week 5 about static factory method.

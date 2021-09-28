@@ -7,15 +7,45 @@ import java.util.Random;
 
 import java.util.ArrayList;
 
+/**
+ * A class for spin attack action.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Action
+ */
+
 public class SpinAttackAction extends Action {
+    /**
+     * GiantAxe's attributes
+     */
     protected GiantAxe giantAxe;
+
+    /**
+     * The Actor that is to be attacked
+     */
     protected Actor target;
+
+    /**
+     * Generates random number
+     */
     protected Random rand = new Random();
 
+    /**
+     * Constructor.
+     *
+     * @param giantAxe the attributes of GiantAxe.
+     */
     public SpinAttackAction(GiantAxe giantAxe) {
         this.giantAxe = giantAxe;
     }
 
+    /**
+     * Transfers the soul from a soul object to another
+     * @param actor the player
+     * @param map the location where the souls is drop.
+     */
     public void transferSouls(Actor actor, GameMap map){
         target.asSoul().transferSouls(actor.asSoul());
         Actions dropActions = new Actions();
@@ -29,6 +59,12 @@ public class SpinAttackAction extends Action {
 
     }
 
+    /**
+     * This method is used to execute the interaction between the NPC and the player when they are in combat.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return result, a descriptive message.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         String result = actor.getClass().getSimpleName() + " Spin Giant Axe";
@@ -90,6 +126,11 @@ public class SpinAttackAction extends Action {
         return result;
     }
 
+    /**
+     * Descriptive message shows the player uses the skill SpinAttack action.
+     * @param actor The actor performing the action.
+     * @return a string of descriptive message
+     */
     @Override
     public String menuDescription(Actor actor) {
         String res = "Unkindled (" + actor.getClass().getSimpleName() + ") Spin Giant Axe";

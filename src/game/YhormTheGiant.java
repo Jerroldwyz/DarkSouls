@@ -9,7 +9,14 @@ import game.interfaces.Soul;
 import java.util.ArrayList;
 import java.util.Random;
 
-
+/**
+ * A class for YhormTheGiant.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Action
+ */
 public class YhormTheGiant extends LordOfCinder implements Soul {
 
     /**
@@ -21,8 +28,20 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
      * Declaring a follow behaviour object
      */
     private FollowBehaviour followBehaviour;
+
+    /**
+     * Generates random number
+     */
     private Random rand = new Random();
+
+    /**
+     * Check the number of usage.
+     */
     private boolean firstTime = true;
+
+    /**
+     * the location of giant.
+     */
     private Location initLocation;
 
     /**

@@ -12,7 +12,13 @@ import java.util.Random;
 
 /**
  * An undead minion.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Enemy
  */
+
 public class Undead extends Enemy implements Soul {
 	// Will need to change this to a collection if Undeads gets additional Behaviours.
 	/**
@@ -20,6 +26,9 @@ public class Undead extends Enemy implements Soul {
 	 */
 	private ArrayList<Behaviour> behaviours = new ArrayList<>();
 
+	/**
+	 * The initial location of the skeleton.
+	 */
 	private Location initLocation;
 
 	/**
@@ -41,6 +50,11 @@ public class Undead extends Enemy implements Soul {
 		this.addCapability(Abilities.TOENTERVALLEY);
 	}
 
+	/**
+	 * A getter for undead's location.
+	 *
+	 * @return return the undead's location.
+	 */
 	public Location getInitLocation() {
 		return initLocation;
 	}

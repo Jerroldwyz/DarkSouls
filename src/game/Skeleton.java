@@ -10,9 +10,19 @@ import java.util.Random;
 
 /**
  * A monster that holds either a broadsword or giant axe
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Enemy
  */
+
 public class Skeleton extends Enemy implements Soul {
+    /**
+     * The initial location of the skeleton.
+     */
     private Location initLocation;
+
     /**
      * An array list to store the behaviours of skeleton such as wander and follow behaviour
      */
@@ -44,6 +54,9 @@ public class Skeleton extends Enemy implements Soul {
         skeletonFirstDeath = isFirst;
     }
 
+    /**
+     * Generates random number.
+     */
     protected Random rand = new Random();
 
     /**
@@ -51,6 +64,7 @@ public class Skeleton extends Enemy implements Soul {
      * All skeletons are represented by an 's' and have 100 hit points.
      *
      * @param name the name of this Skeleton
+     * @param gameMap the location where skeleton will spawn on the map.
      */
     public Skeleton(String name, GameMap gameMap, int x, int y) {
         super(name, 's', 100);
@@ -68,13 +82,13 @@ public class Skeleton extends Enemy implements Soul {
     }
 
 
-
+    /**
+     * A getter for skeleton's location.
+     *
+     * @return return the skeleton's location.
+     */
     public Location getInitLocation() {
         return initLocation;
-    }
-
-    protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(10, "punches");
     }
 
     /**
@@ -112,13 +126,6 @@ public class Skeleton extends Enemy implements Soul {
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        // loop through all behaviours
-        if(map.locationOf(this).getGround().getClass() == Valley.class ){
-            map.removeActor(this);
-            display.println("SKELETON DROPPED INTO THE VALLEY");
-            return new DoNothingAction();
-        }
-
         for (Action action : actions.getUnmodifiableActionList()) {
             if (action.getClass() == SpinAttackAction.class) {
                 int random = rand.nextInt(100);
