@@ -32,6 +32,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
+		this.addCapability(Abilities.TOENTERVALLEY);
 	}
 
 	public void setSoulCount(int soulCount) {
@@ -138,6 +139,9 @@ public class Player extends Actor implements Soul {
 		if(this.getWeapon().getClass() == StormRuler.class){
 			if(StormRuler.getCharge() > 0 && StormRuler.getCharge() != 3){
 				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(charging) , " + this.getSoulCount() + " souls.");
+			}
+			else{
+				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
 			}
 		}else {
 			display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
