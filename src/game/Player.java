@@ -28,11 +28,11 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
-		this.addItemToInventory(new GiantAxe());
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
 		this.addCapability(Abilities.TOENTERVALLEY);
+		this.addItemToInventory(new Broadsword());
 	}
 
 	public void setSoulCount(int soulCount) {
@@ -97,18 +97,16 @@ public class Player extends Actor implements Soul {
 			if(StormRuler.getCharge() == 3){
 				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(charging last round), " + this.getSoulCount() + " souls.");
 			}
-			for(Exit exit : here.getExits()){
-				Location destination = exit.getDestination();
-				if(map.isAnActorAt(destination)) {
-					if(StormRuler.getCharge() == 3) {
-						if (map.getActorAt(destination).getClass() == YhormTheGiant.class) {
-							StormRuler.setSkill(Abilities.WINDSLASH);
-							StormRuler.setCharge(0);
-							this.removeCapability(Status.DISARMED);
-						}
-					}
-				}
+//			for(Exit exit : here.getExits()){
+//				Location destination = exit.getDestination();
+//				if(map.isAnActorAt(destination)) {
+			if(StormRuler.getCharge() == 3) {
+				StormRuler.setSkill(Abilities.WINDSLASH);
+				StormRuler.setCharge(0);
+				this.removeCapability(Status.DISARMED);
 			}
+//				}
+//			}
 
 		}
 
@@ -126,7 +124,7 @@ public class Player extends Actor implements Soul {
 			display.println("YOU DROPPED INTO THE VALLEY");
 			display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
 			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
-			this.heal(1000);
+			this.heal(10000);
 			return new DoNothingAction();
 		}
 

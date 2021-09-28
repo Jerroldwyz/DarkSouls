@@ -10,9 +10,9 @@ import java.util.List;
 
 public class StormRuler extends MeleeWeapon {
     private static Enum ability;
-    StormRulerAction stormRulerAction;
+    private static StormRulerAction stormRulerAction;
     private Actor target;
-    Actions actions = new Actions();
+    private Actions actions = new Actions();
     private static int charge = 0;
 
     public StormRuler(Enum ability){
@@ -27,10 +27,10 @@ public class StormRuler extends MeleeWeapon {
                 this.stormRulerAction = new StormRulerAction(this, Abilities.CHARGE);
                 actions.add(stormRulerAction);
             }
-        } else if (this.ability == Abilities.WINDSLASH) {
-            this.stormRulerAction = new StormRulerAction(this, Abilities.WINDSLASH);
-            actions.add(stormRulerAction);
-            stormRulerAction = null;
+//        } else if (this.ability == Abilities.WINDSLASH) {
+//            this.stormRulerAction = new StormRulerAction(this, Abilities.WINDSLASH);
+//            actions.add(stormRulerAction);
+//            stormRulerAction = null;
         }
         return actions.getUnmodifiableActionList();
     }
@@ -57,6 +57,10 @@ public class StormRuler extends MeleeWeapon {
 
     public static Enum getAbility(){
         return ability;
+    }
+
+    public static void setStormRulerAction(){
+        stormRulerAction = null;
     }
 
 }
