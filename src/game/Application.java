@@ -56,7 +56,7 @@ public class Application {
 			world.addPlayer(player, gameMap.at(7, 24));
 
 			// Place Yhorm the Giant/boss in the map
-			gameMap.at(6, 25).addActor(new YhormTheGiant("Yhorm the Giant"));
+			gameMap.at(6, 25).addActor(new YhormTheGiant("Yhorm the Giant", gameMap, 6, 25));
 
 			// Place a Hollow in the the map
 			// FIXME: the Undead should be generated from the Cemetery

@@ -119,16 +119,25 @@ public class Player extends Actor implements Soul {
 			this.asSoul().transferSouls(tokenOfSoul.asSoul());
 			display.println(Integer.toString(tokenOfSoul.getSoulCount()));
 			prevLocation.addItem(tokenOfSoul);
+			if(!this.isConscious()){
+				map.moveActor(this, map.at(38,12));
+				display.println("YOU DROPPED INTO THE VALLEY");
+				display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
+				display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
+				this.heal(1000);
+				this.getEstusFlask().setCharge(3);
+				return new DoNothingAction();
+			}
 		}
 
-		if(!this.isConscious()){
-			map.moveActor(this, map.at(38,12));
-			display.println("YOU DROPPED INTO THE VALLEY");
-			display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
-			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
-			this.heal(1000);
-			return new DoNothingAction();
-		}
+//		if(!this.isConscious()){
+//			map.moveActor(this, map.at(38,12));
+//			display.println("YOU DROPPED INTO THE VALLEY");
+//			display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
+//			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
+//			this.heal(1000);
+//			return new DoNothingAction();
+//		}
 
 		if (lastAction.getNextAction() != null){
 			return lastAction.getNextAction();}

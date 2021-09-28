@@ -6,6 +6,7 @@ import game.interfaces.Behaviour;
 import game.interfaces.Soul;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class YhormTheGiant extends LordOfCinder implements Soul {
@@ -19,6 +20,9 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
      * Declaring a follow behaviour object
      */
     private FollowBehaviour followBehaviour;
+    private Random rand = new Random();
+    private boolean firstTime = true;
+    private Location initLocation;
 
     /**
      * Constructor.
@@ -26,10 +30,15 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
      *
      * @param name the name of this Undead
      */
-    public YhormTheGiant(String name) {
+    public YhormTheGiant(String name, GameMap gameMap, int x, int y) {
         super(name, 'Y', 500);
+        this.initLocation = new Location(gameMap,x,y);
         this.setSoulCount(5000);
-        //this.addItemToInventory(new GreatMachete());
+        this.addItemToInventory(new GreatMachete(this));
+    }
+
+    public Location getInitLocation() {
+        return initLocation;
     }
 
     /**
@@ -42,6 +51,8 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
      * @return list of actions
      * @see Status#HOSTILE_TO_ENEMY
      */
+
+
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         Actions actions = new Actions();
@@ -51,7 +62,7 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
                 this.followBehaviour = new FollowBehaviour(otherActor);
                 behaviours.add(this.followBehaviour);
             }
-            if(!otherActor.hasCapability(Status.DISARMED)) {
+            if (!otherActor.hasCapability(Status.DISARMED)) {
                 actions.add(new AttackAction(this, direction));
             }
 
@@ -67,7 +78,11 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        if(this.hasCapability(Status.STUNNED)){
+        if (this.hitPoints < maxHitPoints / 2) {
+            this.addCapability(Status.ENRAGED);
+            display.println("YHORM THE GIANT HAS ENTERED ENRAGED FORM");
+        }
+        if (this.hasCapability(Status.STUNNED)) {
             this.removeCapability(Status.STUNNED);
             display.println(this + " is stunned this turn [" + this.hitPoints + "/" + this.maxHitPoints + "]");
             return new DoNothingAction();
@@ -76,26 +91,37 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
         // loop through all behaviours
         if (!actions.getUnmodifiableActionList().isEmpty()) {
             for (Action action : actions.getUnmodifiableActionList()) {
+                if (action.getClass() == BurningGroundAction.class) {
+                    if (firstTime) {
+                        firstTime = false;
+                        return action;
+                    } else {
+                        int random = rand.nextInt(100);
+                        if (random >= 85) {
+                            return action;
+                        }
+                    }
+                }
+
                 if (action.getClass() == AttackAction.class) {
                     display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
                     return action;
                 }
             }
-        }
 
-        for (Behaviour Behaviour : behaviours) {
-            if (behaviours.contains(followBehaviour)) {
-                Action action = followBehaviour.getAction(this, map);
-                display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
-                if (action != null){
+            for (Behaviour Behaviour : behaviours) {
+                if (behaviours.contains(followBehaviour)) {
+                    Action action = followBehaviour.getAction(this, map);
+                    display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                    if (action != null) {
+                        return action;
+                    }
+                }
+                Action action = Behaviour.getAction(this, map);
+                if (action != null) {
                     return action;
                 }
             }
-            Action action = Behaviour.getAction(this, map);
-            if (action != null){
-                return action;
-            }
-        }
-        return new DoNothingAction();
+        }return new DoNothingAction();
     }
 }

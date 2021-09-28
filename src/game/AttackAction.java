@@ -2,6 +2,7 @@ package game;
 
 import java.util.Random;
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 import game.enums.Status;
 
 /**
@@ -78,6 +79,11 @@ public class AttackAction extends Action {
 				damage = weapon.damage();
 			}
 		}
+		else if(weapon.getClass() == GreatMachete.class && actor.hasCapability(Status.ENRAGED)){
+			GreatMachete greatMachete = (GreatMachete) weapon;
+			greatMachete.setHitRate(90);
+			damage = greatMachete.damage();
+		}
 		else{
 			damage = weapon.damage();
 		}
@@ -124,8 +130,14 @@ public class AttackAction extends Action {
 				else if(actor.getClass() == Undead.class){
 					Undead undead = (Undead) actor;
 					map.moveActor(undead, map.at(undead.getInitLocation().x(),undead.getInitLocation().y()));
+				}else if(actor.getClass() == YhormTheGiant.class){
+					YhormTheGiant yhormTheGiant = (YhormTheGiant) actor;
+					map.moveActor(yhormTheGiant, map.at(yhormTheGiant.getInitLocation().x(),yhormTheGiant.getInitLocation().y()));
+					yhormTheGiant.removeCapability(Status.ENRAGED);
 				}
 				target.heal(1000);
+				Player player = (Player) target;
+				player.getEstusFlask().setCharge(3);
 				actor.heal(1000);
 				result += "\n YOU ARE DEAD AND HAS BEEN SENT BACK TO BONFIRE";
 			}
