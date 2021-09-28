@@ -11,8 +11,8 @@ import game.interfaces.Soul;
 public class Player extends Actor implements Soul {
     
 	private final Menu menu = new Menu();
-	private int soulCount = 1000;
-	private  Location prevLocation;
+	private int soulCount = 0;
+	private Location prevLocation;
 	private EstusFlask estusFlask = new EstusFlask(this);
 
 	/**
@@ -28,7 +28,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
-		this.addItemToInventory(new GiantAxe());
+		this.addItemToInventory(new Broadsword());
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
@@ -117,7 +117,6 @@ public class Player extends Actor implements Soul {
 			this.addCapability(Status.DEAD);
 			TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", this);
 			this.asSoul().transferSouls(tokenOfSoul.asSoul());
-			display.println(Integer.toString(tokenOfSoul.getSoulCount()));
 			prevLocation.addItem(tokenOfSoul);
 			if(!this.isConscious()){
 				map.moveActor(this, map.at(38,12));
@@ -130,14 +129,6 @@ public class Player extends Actor implements Soul {
 			}
 		}
 
-//		if(!this.isConscious()){
-//			map.moveActor(this, map.at(38,12));
-//			display.println("YOU DROPPED INTO THE VALLEY");
-//			display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
-//			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
-//			this.heal(1000);
-//			return new DoNothingAction();
-//		}
 
 		if (lastAction.getNextAction() != null){
 			return lastAction.getNextAction();}

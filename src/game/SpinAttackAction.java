@@ -76,6 +76,8 @@ public class SpinAttackAction extends Action {
                             Skeleton skeleton = (Skeleton) actor;
                             map.moveActor(skeleton, map.at(skeleton.getInitLocation().x(),skeleton.getInitLocation().y()));
                         }
+                        Player player = (Player) target;
+                        player.getEstusFlask().setCharge(3);
                         target.heal(1000);
                         actor.heal(1000);
                         result += "\n YOU ARE DEAD AND HAS BEEN SENT BACK TO BONFIRE";

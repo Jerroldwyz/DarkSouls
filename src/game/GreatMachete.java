@@ -13,7 +13,7 @@ public class GreatMachete extends MeleeWeapon{
     BurningGroundAction burningGroundAction;
 
     public GreatMachete(Actor actor) {
-        super("GreatMachete", 'M', 0, "Slash", 60);
+        super("GreatMachete", 'M', 95, "Slash", 60);
         this.actor = actor;
     }
 

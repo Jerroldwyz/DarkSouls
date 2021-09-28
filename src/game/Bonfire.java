@@ -42,7 +42,7 @@ public class Bonfire extends Ground{
         }
         return actions;
     }
-    
+
     /**
      * Check whether the actor can enter the BonFire or not.
      * @param actor The actor performing the action.
@@ -53,4 +53,3 @@ public class Bonfire extends Ground{
         return actor.hasCapability(Abilities.REST);
     }
 }
-
