@@ -7,12 +7,33 @@ import game.interfaces.Soul;
 
 /**
  * Class representing the Player.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Actor
  */
+
 public class Player extends Actor implements Soul {
-    
+
+	/**
+	 * The menu for the game
+	 */
 	private final Menu menu = new Menu();
-	private int soulCount = 1000;
-	private  Location prevLocation;
+
+	/**
+	 * The soulCount within the player.
+	 */
+	private int soulCount = 0;
+
+	/**
+	 * The player's location
+	 */
+	private Location prevLocation;
+
+	/**
+	 * The Attributes of estusFlask.
+	 */
 	private EstusFlask estusFlask = new EstusFlask(this);
 
 	/**
@@ -28,13 +49,17 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
+		this.addItemToInventory(new Broadsword());
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
 		this.addCapability(Abilities.TOENTERVALLEY);
-		this.addItemToInventory(new Broadsword());
 	}
 
+	/**
+	 * The setter for soulCount where changes the value of soulCount.
+	 * @param soulCount
+	 */
 	public void setSoulCount(int soulCount) {
 		this.soulCount = soulCount;
 	}
@@ -47,10 +72,18 @@ public class Player extends Actor implements Soul {
 		return soulCount;
 	}
 
+	/**
+	 * The getter for player max hp
+	 * @return player's max hp
+	 */
 	public int getMaxHitPoints(){
 		return maxHitPoints;
 	}
 
+	/**
+	 * The getter for estusFlask
+	 * @return estusFlask's Attributes
+	 */
 	public EstusFlask getEstusFlask() {
 		return estusFlask;
 	}
@@ -97,16 +130,18 @@ public class Player extends Actor implements Soul {
 			if(StormRuler.getCharge() == 3){
 				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(charging last round), " + this.getSoulCount() + " souls.");
 			}
-//			for(Exit exit : here.getExits()){
-//				Location destination = exit.getDestination();
-//				if(map.isAnActorAt(destination)) {
-			if(StormRuler.getCharge() == 3) {
-				StormRuler.setSkill(Abilities.WINDSLASH);
-				StormRuler.setCharge(0);
-				this.removeCapability(Status.DISARMED);
+			for(Exit exit : here.getExits()){
+				Location destination = exit.getDestination();
+				if(map.isAnActorAt(destination)) {
+					if(StormRuler.getCharge() == 3) {
+						if (map.getActorAt(destination).getClass() == YhormTheGiant.class) {
+							StormRuler.setSkill(Abilities.WINDSLASH);
+							StormRuler.setCharge(0);
+							this.removeCapability(Status.DISARMED);
+						}
+					}
+				}
 			}
-//				}
-//			}
 
 		}
 
@@ -115,18 +150,18 @@ public class Player extends Actor implements Soul {
 			this.addCapability(Status.DEAD);
 			TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", this);
 			this.asSoul().transferSouls(tokenOfSoul.asSoul());
-			display.println(Integer.toString(tokenOfSoul.getSoulCount()));
 			prevLocation.addItem(tokenOfSoul);
+			if(!this.isConscious()){
+				map.moveActor(this, map.at(38,12));
+				display.println("YOU DROPPED INTO THE VALLEY");
+				display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
+				display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
+				this.heal(1000);
+				this.getEstusFlask().setCharge(3);
+				return new DoNothingAction();
+			}
 		}
 
-		if(!this.isConscious()){
-			map.moveActor(this, map.at(38,12));
-			display.println("YOU DROPPED INTO THE VALLEY");
-			display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
-			display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
-			this.heal(10000);
-			return new DoNothingAction();
-		}
 
 		if (lastAction.getNextAction() != null){
 			return lastAction.getNextAction();}
@@ -177,6 +212,11 @@ public class Player extends Actor implements Soul {
 		return success;
 	}
 
+	/**
+	 * substract the souls of the player
+	 * @param souls number of souls to be reduced.
+	 * @return a boolean value to indicate if reduction is successful.
+	 */
 	@Override
 	public boolean subtractSouls(int souls) {
 		boolean success = false;

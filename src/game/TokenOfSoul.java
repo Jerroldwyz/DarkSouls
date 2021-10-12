@@ -6,20 +6,55 @@ import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Soul;
 
+/**
+ * A class for TokenOfSoul where it is dropped by the player when the player died.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Item
+ */
+
 public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
+    /**
+     * the soulCount for the tokenOfSoul
+     */
     private int soulCount = 0;
+
+    /**
+     * The player
+     */
     private Actor player;
+
+    /**
+     * The object of pickUpTOSAction.
+     */
     private PickUpTOSAction pickUpTOSAction;
 
+    /**
+     * Constructor.
+     *
+     * @param name
+     * @param target the player.
+     */
     public TokenOfSoul(String name, Actor target){
         super(name, '$', true);
         player = target;
     }
 
+    /**
+     * Gets the soul count of the player.
+     * @return soulCount the number of souls within the player.
+     */
     public int getSoulCount() {
         return soulCount;
     }
 
+    /**
+     * change the soul count of the player
+     * @param souls the number of souls in player.
+     * @return boolean
+     */
     public boolean setSoulCount(int souls){
         boolean flag = false;
         if(souls >= 0){
@@ -30,7 +65,10 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
     }
 
 
-
+    /**
+     * Transfers the soul to the token of souls.
+     * @param soulObject a target souls.
+     */
     @Override
     public void transferSouls(Soul soulObject) {
         soulObject.addSouls(soulCount);
@@ -52,6 +90,11 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
         return success;
     }
 
+    /**
+     * Ensure the pickUPSAction method is implemented not getPickUpAction.
+     * @param actor The actor performing the action.
+     * @return null.
+     */
     @Override
     public PickUpItemAction getPickUpAction(Actor actor) {
         if(actor.hasCapability(Abilities.PICKUPTOS)){
@@ -59,6 +102,10 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
         }return null;
     }
 
+    /**
+     * Descriptive message that will be printed out in the console.
+     * @return a descriptive message.
+     */
     public String toString(){
         return "Token Of Soul";
     }

@@ -54,17 +54,17 @@ public class Application {
 
 			Actor player = new Player("Unkindled (Player)", '@', 100);
 			//38, 12
-			world.addPlayer(player, gameMap.at(7, 24));
+			world.addPlayer(player, gameMap.at(38, 12));
 
 			// Place Yhorm the Giant/boss in the map
-			gameMap.at(6, 25).addActor(new YhormTheGiant("Yhorm the Giant"));
+			gameMap.at(6, 25).addActor(new YhormTheGiant("Yhorm the Giant", gameMap, 6, 25));
 
 			// Place a Hollow in the the map
 			// FIXME: the Undead should be generated from the Cemetery
-//			gameMap.at(37, 10).addActor(new Undead("Undead",gameMap, 37, 10));
-//			gameMap.at(38, 11).addActor(new Undead("Undead",gameMap,38, 11));
-//			gameMap.at(38, 18).addActor(new Undead("Undead",gameMap,38, 13));
-			gameMap.at(30, 2).addActor(new Skeleton("Skeleton",gameMap,30, 2));
+			gameMap.at(20, 10).addActor(new Skeleton("Skeleton",gameMap, 20, 10));
+			gameMap.at(14, 11).addActor(new Skeleton("Skeleton",gameMap,14, 11));
+			gameMap.at(48, 13).addActor(new Skeleton("Skeleton",gameMap,48, 13));
+			gameMap.at(40, 2).addActor(new Skeleton("Skeleton",gameMap,40, 2));
 			gameMap.at(30, 3).addActor(new Skeleton("Skeleton",gameMap, 30, 3));
 			gameMap.at(39, 19).addActor(new Skeleton("Skeleton", gameMap, 39, 19));
 			gameMap.at(37, 11).addActor(new FireKeeper(player));

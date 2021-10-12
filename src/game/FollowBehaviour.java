@@ -4,11 +4,18 @@ import edu.monash.fit2099.engine.*;
 import game.interfaces.Behaviour;
 
 /**
- * A class that figures out a MoveAction that will move the actor one step 
+ * A class that figures out a MoveAction that will move the actor one step
  * closer to a target Actor.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
  */
-public class FollowBehaviour implements Behaviour {
 
+public class FollowBehaviour implements Behaviour {
+	/**
+	 * The Actor to follow
+	 */
 	private Actor target;
 
 	/**
@@ -20,6 +27,12 @@ public class FollowBehaviour implements Behaviour {
 		this.target = subject;
 	}
 
+	/**
+	 * This method is to allow the Non-playable Character(NPC) follow the player when the Player is near to the NPC.
+	 * @param actor The Non-playable Character(NPC)
+	 * @param map The map the actor is on.
+	 * @return change the NPC location on the map.
+	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))

@@ -9,11 +9,24 @@ import java.util.List;
  * It loops through all items in the Actor inventory.
  * The old weapon will be gone.
  * TODO: you may update this code if required.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see PickUpItemAction
+ *
  */
+
 public class SwapWeaponAction extends PickUpItemAction {
+
+    /**
+     * The weapon created abstract from Item class.
+     */
     private Item weapon;
+
     /**
      * Constructor
+     *
      * @param weapon the new item that will replace the weapon in the Actor's inventory.
      */
     public SwapWeaponAction(Item weapon){
@@ -21,6 +34,12 @@ public class SwapWeaponAction extends PickUpItemAction {
         this.weapon = weapon;
     }
 
+    /**
+     * This method is used to execute the swapWeapon action implemented by the player.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return result, a descriptive message showing what weapon has the player swapped.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Weapon currentWeapon = actor.getWeapon();

@@ -4,6 +4,15 @@ import edu.monash.fit2099.engine.*;
 import game.enums.Status;
 import game.interfaces.Soul;
 
+/**
+ * A class for all the enemy in the game.
+ *
+ * @author Ng Kai Yi
+ * @author Jerrold Wong Youn Zhuet
+ * @version 2
+ * @see Actor
+ */
+
 public class Enemy extends Actor implements Soul {
     /**
      * The variable which keeps track of the soul of an enemy
