@@ -53,3 +53,4 @@ public class Bonfire extends Ground{
         return actor.hasCapability(Abilities.REST);
     }
 }
+

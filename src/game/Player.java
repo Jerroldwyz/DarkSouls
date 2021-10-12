@@ -54,6 +54,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
 		this.addCapability(Abilities.TOENTERVALLEY);
+		this.addCapability(Abilities.TOENTERFOGDOOR);
 	}
 
 	/**
