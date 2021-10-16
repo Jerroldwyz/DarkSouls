@@ -136,7 +136,7 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
             for (Behaviour Behaviour : behaviours) {
                 if (behaviours.contains(followBehaviour)) {
                     Action action = followBehaviour.getAction(this, map);
-                    display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using" + this.getWeapon());
+                    display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                     if (action != null) {
                         return action;
                     }

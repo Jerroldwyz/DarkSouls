@@ -67,9 +67,10 @@ public class StormRuler extends MeleeWeapon {
                 actions.add(stormRulerAction);
             }
 //        } else if (this.ability == Abilities.WINDSLASH) {
+//
+//            actions.clear();
 //            this.stormRulerAction = new StormRulerAction(this, Abilities.WINDSLASH);
 //            actions.add(stormRulerAction);
-//            stormRulerAction = null;
         }
         return actions.getUnmodifiableActionList();
     }

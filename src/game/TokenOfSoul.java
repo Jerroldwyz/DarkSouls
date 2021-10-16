@@ -29,7 +29,7 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
     /**
      * The object of pickUpTOSAction.
      */
-    private PickUpTOSAction pickUpTOSAction;
+    private PickUpTOSAction pickUpTOSAction = new PickUpTOSAction(this);
 
     /**
      * Constructor.
@@ -98,6 +98,7 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
     @Override
     public PickUpItemAction getPickUpAction(Actor actor) {
         if(actor.hasCapability(Abilities.PICKUPTOS)){
+//            return pickUpTOSAction;
             return null;
         }return null;
     }

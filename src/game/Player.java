@@ -126,24 +126,23 @@ public class Player extends Actor implements Soul {
 		if(this.hasCapability(Status.DEAD)){
 			this.removeCapability(Status.DEAD);
 		}else if(this.hasCapability(Status.DISARMED)){
-			StormRuler.setCharge(StormRuler.getCharge()+1);
+			if(StormRuler.getCharge() < 3) {
+				StormRuler.setCharge(StormRuler.getCharge() + 1);
+			}
 			display.println("Storm ruler is charging for round" + (StormRuler.getCharge()));
 			if(StormRuler.getCharge() == 3){
 				display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(charging last round), " + this.getSoulCount() + " souls.");
 			}
 			for(Exit exit : here.getExits()){
 				Location destination = exit.getDestination();
-				if(map.isAnActorAt(destination)) {
+				if(map.isAnActorAt(destination) && map.getActorAt(destination).getClass() == YhormTheGiant.class){
 					if(StormRuler.getCharge() == 3) {
-						if (map.getActorAt(destination).getClass() == YhormTheGiant.class) {
-							StormRuler.setSkill(Abilities.WINDSLASH);
-							StormRuler.setCharge(0);
-							this.removeCapability(Status.DISARMED);
-						}
+						StormRuler.setSkill(Abilities.WINDSLASH);
+						StormRuler.setCharge(0);
+						this.removeCapability(Status.DISARMED);
 					}
 				}
 			}
-
 		}
 
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){

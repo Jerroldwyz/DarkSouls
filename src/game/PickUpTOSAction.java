@@ -51,6 +51,7 @@ public class PickUpTOSAction extends PickUpItemAction {
                 }else{
                     Dirt dirt = (Dirt)location.getGround();
                     dirt.setActions(new Actions());
+                    dirt.pickUpTOSAction = null;
                 }
                 result += tokenOfSoul + " has been picked up";
             }
