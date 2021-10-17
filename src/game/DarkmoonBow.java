@@ -33,7 +33,7 @@ public class DarkmoonBow extends WeaponItem {
      * @param actor that wields the weapon
      */
     public DarkmoonBow(Actor actor) {
-        super("DarkMoon Longbow", 'D', 70, "shoots", 100);
+        super("DarkMoon Longbow", 'D', 70, "shoots", 80);
 //        actor.addCapability(ranged);
 //        this.addCapability(ranged);
     }
