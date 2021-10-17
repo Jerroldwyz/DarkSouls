@@ -91,9 +91,15 @@ public class Application {
 			Actor player = new Player("Unkindled (Player)", '@', 9001);
 			//38, 12
 			world.addPlayer(player, gameMap.at(38, 12));
+//			world.addPlayer(player, gameMap1.at(43, 12));
 
-			// Place Yhorm the Giant/boss in the map
-			gameMap.at(6, 25).addActor(new YhormTheGiant("Yhorm the Giant", gameMap, 6, 25));
+
+		// Place Yhorm the Giant/boss in the map
+			YhormTheGiant yhormTheGiant = new YhormTheGiant("Yhorm the Giant", gameMap, 6, 25);
+			gameMap.at(6, 25).addActor(yhormTheGiant);
+			AldrichTheDevourer aldrichTheDevourer = new AldrichTheDevourer("Aldrich The Destroyer", gameMap1, 43, 16);
+			gameMap1.at(43,16).addActor(aldrichTheDevourer);
+
 
 			// Place a Hollow in the the map
 			// FIXME: the Undead should be generated from the Cemetery
@@ -105,6 +111,7 @@ public class Application {
 			gameMap.at(39, 19).addActor(new Skeleton("Skeleton", gameMap, 39, 19));
 			gameMap.at(37, 11).addActor(new FireKeeper(player));
 			gameMap.at(7,25).addItem(new StormRuler(Abilities.CHARGE));
+
 			world.run();
 
 	}

@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Soul;
+import org.w3c.dom.ranges.Range;
 
 /**
  * Class representing the Player.
@@ -60,7 +61,7 @@ public class Player extends Actor implements Soul {
 
 	/**
 	 * The setter for soulCount where changes the value of soulCount.
-	 * @param soulCount
+	 * @param soulCount to change soulcount
 	 */
 	public void setSoulCount(int soulCount) {
 		this.soulCount = soulCount;
@@ -102,7 +103,12 @@ public class Player extends Actor implements Soul {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY) && !otherActor.hasCapability(Status.STUNNED)){
+			if(otherActor.hasCapability(Abilities.RANGEDWEAPON)){
+				actions.add(new RangedAttackAction(this));
+			}
+			else {
 				actions.add(new AttackAction(this, direction));
+			}
 		}else{
 			actions.add(new DoNothingAction());
 		}
