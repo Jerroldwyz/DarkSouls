@@ -6,8 +6,17 @@ import java.util.Random;
 
 public class OpenChestAction extends Action {
 
+    /**
+     * Constructor.
+     */
     public OpenChestAction() {}
 
+    /**
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return the result of opening the chest (whether meeting Mimic / 1-3 token of soul)
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         String result = "";
