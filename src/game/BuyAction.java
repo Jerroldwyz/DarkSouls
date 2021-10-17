@@ -41,7 +41,7 @@ public class BuyAction extends Action {
 
         if(this.item.getClass() == Broadsword.class){
             Broadsword broadsword = (Broadsword) item;
-            if(player.getSoulCount() > broadsword.getSoulPrice()){
+            if(player.getSoulCount() >= broadsword.getSoulPrice()){
                 for( Item item : items){
                     if(item.asWeapon() != null){
                         player.removeItemFromInventory(item);
@@ -57,7 +57,7 @@ public class BuyAction extends Action {
             }
         }else if(this.item.getClass() == GiantAxe.class) {
             GiantAxe giantAxe = (GiantAxe) item;
-            if (player.getSoulCount() > giantAxe.getSoulPrice()) {
+            if (player.getSoulCount() >= giantAxe.getSoulPrice()) {
                 for (Item item : items) {
                     if (item.asWeapon() != null) {
                         player.removeItemFromInventory(item);

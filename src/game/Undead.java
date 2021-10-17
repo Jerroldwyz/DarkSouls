@@ -86,7 +86,7 @@ public class Undead extends Enemy implements Soul {
 				this.followBehaviour = new FollowBehaviour(otherActor);
 				behaviours.add(this.followBehaviour);
 			}
-			if(!otherActor.hasCapability(Status.DISARMED)) {
+			if(!otherActor.hasCapability(Status.DISARMED) && otherActor.getWeapon().getClass() != DarkmoonBow.class) {
 				actions.add(new AttackAction(this, direction));
 			}
 

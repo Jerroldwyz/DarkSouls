@@ -50,7 +50,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
-		this.addItemToInventory(new GreatMachete(this));
+		this.addItemToInventory(new DarkmoonBow(this));
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
@@ -123,27 +123,29 @@ public class Player extends Actor implements Soul {
 		// Handle multi-turn Actions
 		Location here = map.locationOf(this);
 
-		NumberRange xs, ys;
-		xs = new NumberRange(here.x()-3, 7);
-		ys = new NumberRange(here.y()-3, 7);
+		if(this.getWeapon().getClass() == DarkmoonBow.class) {
+			NumberRange xs, ys;
+			xs = new NumberRange(here.x() - 3, 7);
+			ys = new NumberRange(here.y() - 3, 7);
 
-		for (int x : xs) {
-			if(x<0 || x>79){
-				break;
-			}
-			for (int y : ys) {
-				if(y<0 || y>25){
+			for (int x : xs) {
+				if (x < 0 || x > 79) {
 					break;
 				}
-				if (map.isAnActorAt(map.at(x,y)) && map.getActorAt(map.at(x,y)).hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
-					Actor target = map.getActorAt(map.at(x,y));
-					RangedAttackAction rangedAttackAction = new RangedAttackAction(target);
-					Action action = rangedAttackAction.getAction(this, map);
-					if (action != null){
-						actions.add(action);
+				for (int y : ys) {
+					if (y < 0 || y > 25) {
+						break;
 					}
-				}
+					if (map.isAnActorAt(map.at(x, y)) && map.getActorAt(map.at(x, y)).hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)) {
+						Actor target = map.getActorAt(map.at(x, y));
+						RangedAttackAction rangedAttackAction = new RangedAttackAction(target);
+						Action action = rangedAttackAction.getAction(this, map);
+						if (action != null) {
+							actions.add(action);
+						}
+					}
 
+				}
 			}
 		}
 

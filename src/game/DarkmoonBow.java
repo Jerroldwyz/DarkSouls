@@ -16,7 +16,7 @@ public class DarkmoonBow extends WeaponItem {
     /**
      * to signify that this is a ranged weapon
      */
-    private Enum ranged = Abilities.RANGEDWEAPON;
+//    private Enum ranged = Abilities.RANGEDWEAPON;
 
     /**
      * The object from RangedAttackAction class.
@@ -34,8 +34,8 @@ public class DarkmoonBow extends WeaponItem {
      */
     public DarkmoonBow(Actor actor) {
         super("DarkMoon Longbow", 'D', 70, "shoots", 100);
-        actor.addCapability(ranged);
-        this.addCapability(ranged);
+//        actor.addCapability(ranged);
+//        this.addCapability(ranged);
     }
 
     /**
