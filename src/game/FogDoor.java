@@ -4,13 +4,19 @@ import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
 import game.enums.Status;
 
+/**
+ * Class representing the fogdoor that teleports player to new map
+ *
+ * @author Jerrold Wong Youn Zhuet
+ * @version 1
+ * @see Ground
+ */
 public class FogDoor extends Ground {
 
     /**
      * The object of the Actions class.
      */
     private Actions actions = new Actions();
-
 
     /**
      * An object from NewMapAction
@@ -43,6 +49,7 @@ public class FogDoor extends Ground {
     public void addAction(Action action){
         this.actions.add(action);
     }
+
     /**
      * Check whether the actor can enter the fog door or not.
      * @param actor The actor performing the action.

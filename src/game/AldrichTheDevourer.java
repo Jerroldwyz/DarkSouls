@@ -9,6 +9,14 @@ import game.interfaces.Soul;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Class representing the Lord of Cinder, Aldrich.
+ *
+ * @author Jerrold Wong Youn Zhuet
+ * @version 1
+ * @see LordOfCinder
+ */
+
 public class AldrichTheDevourer extends LordOfCinder implements Soul {
     /**
      * An array list to store the behaviours of skeleton such as wander and follow behaviour
@@ -49,10 +57,18 @@ public class AldrichTheDevourer extends LordOfCinder implements Soul {
         this.addItemToInventory(new CindersOfTheLord(this));
     }
 
+    /**
+     * Gets the initial location of aldrich
+     * @return initial location
+     */
     public Location getInitLocation() {
         return initLocation;
     }
 
+    /**
+     * Adds the behaviour to list of behaviours
+     * @param behaviour
+     */
     public void addBehaviour(Behaviour behaviour){
         behaviours.add(behaviour);
     }
