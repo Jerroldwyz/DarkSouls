@@ -29,8 +29,8 @@ public class DarkmoonBow extends WeaponItem {
     private Actions actions = new Actions();
 
     /**
-     * Constructor.
-     *
+     * Constructor
+     * @param actor that wields the weapon
      */
     public DarkmoonBow(Actor actor) {
         super("DarkMoon Longbow", 'D', 70, "shoots", 100);
