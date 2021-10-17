@@ -79,7 +79,7 @@ public class AldrichTheDevourer extends LordOfCinder implements Soul {
                 this.followBehaviour = new FollowBehaviour(otherActor);
                 behaviours.add(this.followBehaviour);
             }
-            if (!otherActor.hasCapability(Status.DISARMED)) {
+            if (!otherActor.hasCapability(Status.DISARMED) && !otherActor.hasCapability(Abilities.RANGEDWEAPON)) {
                 actions.add(new AttackAction(this, direction));
             }
         }
@@ -107,6 +107,7 @@ public class AldrichTheDevourer extends LordOfCinder implements Soul {
                 if (behaviours.contains(rangedAttackAction)) {
                     Action action = rangedAttackAction.getAction(this, map);
                     if (action != null){
+                        display.println(this.getClass().getSimpleName() + " [" + this.hitPoints + "/" + this.maxHitPoints + "] using " + this.getWeapon());
                         return action;
                     }
                 }

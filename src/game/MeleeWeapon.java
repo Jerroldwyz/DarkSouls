@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.DropItemAction;
 import edu.monash.fit2099.engine.WeaponItem;
+import game.enums.Abilities;
 
 /**
  * A class for all the melee weapons.
@@ -25,6 +26,7 @@ public class MeleeWeapon extends WeaponItem {
      */
     public MeleeWeapon(String name, char displayChar, int damage, String verb, int hitRate) {
         super(name, displayChar, damage, verb, hitRate);
+        this.addCapability(Abilities.MELEEWEAPON);
     }
 
     /**
@@ -36,6 +38,7 @@ public class MeleeWeapon extends WeaponItem {
     public DropItemAction getDropAction(Actor actor) {
         return null;
     }
+
 
     //TODO: please figure out how to disable dropping item action.
 }

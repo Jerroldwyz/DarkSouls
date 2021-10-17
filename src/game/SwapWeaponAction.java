@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 
 import java.util.List;
 

@@ -103,12 +103,7 @@ public class Player extends Actor implements Soul {
 		Actions actions = new Actions();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER_ONLY) && !otherActor.hasCapability(Status.STUNNED)){
-			if(otherActor.hasCapability(Abilities.RANGEDWEAPON)){
-				actions.add(new RangedAttackAction(this));
-			}
-			else {
-				actions.add(new AttackAction(this, direction));
-			}
+			actions.add(new AttackAction(this, direction));
 		}else{
 			actions.add(new DoNothingAction());
 		}
@@ -127,6 +122,25 @@ public class Player extends Actor implements Soul {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
 		Location here = map.locationOf(this);
+
+		NumberRange xs, ys;
+		xs = new NumberRange(here.x()-3, 7);
+		ys = new NumberRange(here.y()-3, 7);
+
+		for (int x : xs) {
+			for (int y : ys) {
+				if (map.isAnActorAt(map.at(x,y)) && map.getActorAt(map.at(x,y)).hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
+					Actor target = map.getActorAt(map.at(x,y));
+					RangedAttackAction rangedAttackAction = new RangedAttackAction(target);
+					Action action = rangedAttackAction.getAction(this, map);
+					if (action != null){
+						actions.add(action);
+					}
+				}
+
+			}
+		}
+
 		if(StormRuler.getAbility() == Abilities.WINDSLASH){
 			display.println("Unkindled " + "(" + this.hitPoints + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + "(FULLY CHARGED), " + this.getSoulCount() + " souls.");
 		}
