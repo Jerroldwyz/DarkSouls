@@ -61,9 +61,9 @@ public class FireKeeper extends Actor {
         List<Item> items = otherActor.getInventory();
         for(Item item : items){
             if(item.getClass() == CindersOfTheLord.class && ((CindersOfTheLord) item).lordOfCinder.getClass() == YhormTheGiant.class){
-                actions.add(new TradeCindersOfTheLord(item));
+                actions.add(new TradeCindersOfTheLordAction(item));
             }else if(item.getClass() == CindersOfTheLord.class && ((CindersOfTheLord) item).lordOfCinder.getClass() == AldrichTheDevourer.class){
-                actions.add(new TradeCindersOfTheLord(item));
+                actions.add(new TradeCindersOfTheLordAction(item));
             }
         }
         return actions;

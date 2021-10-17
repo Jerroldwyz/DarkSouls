@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.List;
 
-public class TradeCindersOfTheLord extends Action {
+public class TradeCindersOfTheLordAction extends Action {
 
     /**
      * All the weapons exist in the game abstract from Item class.
@@ -16,7 +16,7 @@ public class TradeCindersOfTheLord extends Action {
      *
      * @param item All the weapon in the game.
      */
-    public TradeCindersOfTheLord(Item item){
+    public TradeCindersOfTheLordAction(Item item){
         this.item = item;
     }
 
