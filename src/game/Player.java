@@ -50,7 +50,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
-		this.addItemToInventory(new Broadsword());
+		this.addItemToInventory(new GreatMachete(this));
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);

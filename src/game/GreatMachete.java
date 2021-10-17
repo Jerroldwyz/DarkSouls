@@ -49,7 +49,7 @@ public class GreatMachete extends MeleeWeapon{
     @Override
     public List<Action> getAllowableActions() {
         if (burningGroundAction == null) {
-            if (actor.hasCapability(Status.ENRAGED)) {
+            if (actor.hasCapability(Status.ENRAGED) || actor.getClass() == Player.class) {
                 this.burningGroundAction = new BurningGroundAction(this);
                 actions.add(burningGroundAction);
 

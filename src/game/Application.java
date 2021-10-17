@@ -88,7 +88,7 @@ public class Application {
 			fogDoor.addAction(new MoveActorAction(gameMap1.at(38, 0), "into Anor Londo"));
 			gameMap.at(38, 25).setGround(fogDoor);
 
-			Actor player = new Player("Unkindled (Player)", '@', 9001);
+			Actor player = new Player("Unkindled (Player)", '@', 10);
 			//38, 12
 			world.addPlayer(player, gameMap.at(38, 12));
 //			world.addPlayer(player, gameMap1.at(43, 12));

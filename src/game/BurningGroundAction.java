@@ -50,7 +50,7 @@ public class BurningGroundAction extends Action {
                 burningLocation.add(destination);
 
             }
-        }return "Yhorm The Giant burnt its surrounding dirt.";
+        }return actor.getClass().getSimpleName() + " burnt its surrounding dirt.";
     }
 
     /**
@@ -60,6 +60,6 @@ public class BurningGroundAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+        return "BURN SURROUNDING [GREAT MACHETE]";
     }
 }
