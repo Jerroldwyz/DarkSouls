@@ -50,7 +50,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.REST);
 		this.addCapability(Abilities.PICKUPTOS);
 		this.addItemToInventory(estusFlask);
-		this.addItemToInventory(new DarkmoonBow(this));
+		this.addItemToInventory(new Broadsword());
 		this.addCapability(Abilities.TOENTERFLOOR);
 		this.addCapability(Abilities.BUY);
 		this.addCapability(Abilities.PICKUPSTORMRULER);
@@ -185,7 +185,7 @@ public class Player extends Actor implements Soul {
 				display.println("YOU DROPPED INTO THE VALLEY");
 				display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
 				display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
-				this.heal(10000);
+				this.heal(100000);
 				this.getEstusFlask().setCharge(3);
 				return new DoNothingAction();
 			}

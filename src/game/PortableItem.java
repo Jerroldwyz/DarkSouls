@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.Item;
  * @author Ng Kai Yi
  * @author Jerrold Wong Youn Zhuet
  * @version 2
- * @see Action
+ * @see
  */
 
 public class PortableItem extends Item {
