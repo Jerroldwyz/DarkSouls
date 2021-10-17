@@ -53,7 +53,7 @@ public class BurningGround extends Ground {
             System.out.println(target.getClass().getSimpleName() + " is burnt for 25 damage.");
             if(!location.map().getActorAt(location).isConscious()){
                 target.addCapability(Status.DEAD);
-                TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target);
+                TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target, 0);
                 target.asSoul().transferSouls(tokenOfSoul.asSoul());
                 location.map().locationOf(target).addItem(tokenOfSoul);
                 location.map().moveActor(target, location.map().at(38,12));

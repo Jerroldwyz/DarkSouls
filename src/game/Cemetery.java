@@ -17,14 +17,7 @@ import java.util.Random;
  */
 
 public class Cemetery extends Ground {
-    /**
-     * Undead's Attributes.
-     */
     private Undead undead;
-
-    /**
-     * Generates random number.
-     */
     Random rand = new Random();
 
     /**
@@ -35,11 +28,7 @@ public class Cemetery extends Ground {
         super('C');
     }
 
-    /**
-     * Check whether the actor can enter cemetery or not.
-     * @param location The location of actor performing the action.
-     * @return false
-     */
+
     @Override
     public void tick(Location location) {
         boolean add = false;
@@ -61,8 +50,7 @@ public class Cemetery extends Ground {
     }
 
     /**
-     * Check whether the actor can enter cemetery or not.
-     * @param actor The actor performing the action.
+     *?????????????????????????????????????????????????
      * @return false
      */
     @Override

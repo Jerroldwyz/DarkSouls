@@ -37,9 +37,10 @@ public class TokenOfSoul extends Item implements Soul, DesignOSoulsAddOn {
      * @param name
      * @param target the player.
      */
-    public TokenOfSoul(String name, Actor target){
+    public TokenOfSoul(String name, Actor target,int soulCount){
         super(name, '$', true);
         player = target;
+        this.soulCount = soulCount;
     }
 
     /**

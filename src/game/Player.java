@@ -55,6 +55,7 @@ public class Player extends Actor implements Soul {
 		this.addCapability(Abilities.PICKUPSTORMRULER);
 		this.addCapability(Abilities.TOENTERVALLEY);
 		this.addCapability(Abilities.TOENTERFOGDOOR);
+		this.addCapability(Abilities.OPENCHEST);
 	}
 
 	/**
@@ -146,9 +147,9 @@ public class Player extends Actor implements Soul {
 		}
 
 		if(map.locationOf(this).getGround().getClass() == Valley.class ){
-			hurt(1000);
+			hurt(10000);
 			this.addCapability(Status.DEAD);
-			TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", this);
+			TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", this, 0);
 			this.asSoul().transferSouls(tokenOfSoul.asSoul());
 			prevLocation.addItem(tokenOfSoul);
 			if(!this.isConscious()){
@@ -156,7 +157,7 @@ public class Player extends Actor implements Soul {
 				display.println("YOU DROPPED INTO THE VALLEY");
 				display.println("YOU ARE DEAD AND YOU WILL BE RESPAWNED AT THE BONFIRE");
 				display.println("Unkindled " + "(" + 0 + "/" + this.maxHitPoints + "), " + "holding " + this.getWeapon() + ", " + this.getSoulCount() + " souls.");
-				this.heal(1000);
+				this.heal(10000);
 				this.getEstusFlask().setCharge(3);
 				return new DoNothingAction();
 			}

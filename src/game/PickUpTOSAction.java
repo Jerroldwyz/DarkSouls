@@ -45,26 +45,18 @@ public class PickUpTOSAction extends PickUpItemAction {
             if(location.getItems().contains(tokenOfSoul)){
                 tokenOfSoul.asSoul().transferSouls(actor.asSoul());
                 location.removeItem(tokenOfSoul);
-                if(location.getGround().getClass() == Floor.class){
-                    Floor floor = (Floor)location.getGround();
-                    floor.setActions(new Actions());
-                }else{
-                    Dirt dirt = (Dirt)location.getGround();
-                    dirt.setActions(new Actions());
-                    dirt.pickUpTOSAction = null;
-                }
                 result += tokenOfSoul + " has been picked up";
             }
         }
         tokenOfSoul.asSoul().transferSouls(actor.asSoul());
         here.removeItem(tokenOfSoul);
-        if(here.getGround().getClass() == Floor.class){
-            Floor floor = (Floor)here.getGround();
-            floor.setActions(new Actions());
-        }else{
-            Dirt dirt = (Dirt)here.getGround();
-            dirt.setActions(new Actions());
-        }
+//        if(here.getGround().getClass() == Floor.class){
+//            Floor floor = (Floor)here.getGround();
+//            floor.setActions(new Actions());
+//        }else{
+//            Dirt dirt = (Dirt)here.getGround();
+//            dirt.setActions(new Actions());
+//        }
         result += tokenOfSoul + " has been picked up";
         return result;
     }

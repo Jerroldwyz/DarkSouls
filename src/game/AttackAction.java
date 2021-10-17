@@ -117,9 +117,32 @@ public class AttackAction extends Action {
 			}else if(target.getClass() == Undead.class){
 				transferSouls(actor,map);
 				result += System.lineSeparator() + target + " is killed.";
-			}else if(target.getClass() == Player.class){
+			}
+			else if(target.getClass() == Mimic.class){
+
+				Random rand = new Random();
+				int chanceOfDropping = rand.nextInt(10);
+				if(chanceOfDropping < 3){
+					map.locationOf(target).addItem(new TokenOfSoul("tokenOfSoul",actor,100));
+					result += System.lineSeparator() + target + " is killed and one token of soul is dropped.";
+				}
+				else if(chanceOfDropping > 3 && chanceOfDropping < 7){
+					map.locationOf(target).addItem(new TokenOfSoul("tokenOfSoul",actor,100));
+					map.locationOf(target).addItem(new TokenOfSoul("tokenOfSoul",actor,100));
+					result += System.lineSeparator() + target + " is killed and two tokens of soul are dropped.";
+				}
+				else{
+					map.locationOf(target).addItem(new TokenOfSoul("tokenOfSoul",actor,100));
+					map.locationOf(target).addItem(new TokenOfSoul("tokenOfSoul",actor,100));
+					map.locationOf(target).addItem(new TokenOfSoul("tokenOfSoul",actor,100));
+					result += System.lineSeparator() + target + " is killed and three tokens of soul are dropped.";
+				}
+				transferSouls(actor,map);
+
+			}
+			else if(target.getClass() == Player.class){
 				target.addCapability(Status.DEAD);
-				TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target);
+				TokenOfSoul tokenOfSoul = new TokenOfSoul("tokenOfSoul", target, 0);
 				target.asSoul().transferSouls(tokenOfSoul.asSoul());
 				map.locationOf(target).addItem(tokenOfSoul);
 				map.moveActor(target, map.at(38,12));
@@ -134,6 +157,11 @@ public class AttackAction extends Action {
 					YhormTheGiant yhormTheGiant = (YhormTheGiant) actor;
 					map.moveActor(yhormTheGiant, map.at(yhormTheGiant.getInitLocation().x(),yhormTheGiant.getInitLocation().y()));
 					yhormTheGiant.removeCapability(Status.ENRAGED);
+				}
+				else if(actor.getClass() == Mimic.class){
+					Mimic mimic = (Mimic) actor;
+					map.at(mimic.getInitLocation().x(),mimic.getInitLocation().y()).setGround(new Chest());
+					map.removeActor(mimic);
 				}
 				target.heal(1000);
 				Player player = (Player) target;

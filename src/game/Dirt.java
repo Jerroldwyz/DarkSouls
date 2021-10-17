@@ -46,14 +46,13 @@ public class Dirt extends Ground {
 	 */
 	@Override
 	public Actions allowableActions(Actor actor, Location destination, String direction) {
+		Actions actions = new Actions();
 		if(!destination.getItems().isEmpty()){
 			for (Item item : destination.getItems()) {
 				if(item.getClass() == TokenOfSoul.class && actor.hasCapability(Abilities.PICKUPTOS)) {
-					if(pickUpTOSAction == null) {
-						pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
-						actions.add(pickUpTOSAction);
-						return actions;
-					}
+					pickUpTOSAction = new PickUpTOSAction((TokenOfSoul) item);
+					actions.add(pickUpTOSAction);
+					return actions;
 				} else if(item.getClass() == StormRuler.class && actor.hasCapability(Abilities.PICKUPSTORMRULER)){
 					//if its not token of soul its storm ruler
 					if(swapWeaponAction == null) {
@@ -67,9 +66,6 @@ public class Dirt extends Ground {
 		return actions;
 	}
 
-	public void tick(){
-		pickUpTOSAction = null;
-	}
     /**
      * A setter that changes the object actions in Actions class.
      * @param actions The actions object in Actions class.
