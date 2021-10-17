@@ -46,6 +46,7 @@ public class AldrichTheDevourer extends LordOfCinder implements Soul {
         this.initLocation = new Location(gameMap,x,y);
         this.setSoulCount(5000);
         this.addItemToInventory(new DarkmoonBow(this));
+        this.addItemToInventory(new CindersOfTheLord(this));
     }
 
     public Location getInitLocation() {

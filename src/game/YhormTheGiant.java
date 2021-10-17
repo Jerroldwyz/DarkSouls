@@ -55,7 +55,9 @@ public class YhormTheGiant extends LordOfCinder implements Soul {
         this.initLocation = new Location(gameMap,x,y);
         this.setSoulCount(5000);
         this.addItemToInventory(new GreatMachete(this));
+        this.addItemToInventory(new CindersOfTheLord(this));
     }
+
 
     public Location getInitLocation() {
         return initLocation;

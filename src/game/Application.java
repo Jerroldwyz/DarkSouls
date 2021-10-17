@@ -88,10 +88,10 @@ public class Application {
 			fogDoor.addAction(new MoveActorAction(gameMap1.at(38, 0), "into Anor Londo"));
 			gameMap.at(38, 25).setGround(fogDoor);
 
-			Actor player = new Player("Unkindled (Player)", '@', 10);
+			Actor player = new Player("Unkindled (Player)", '@', 2000);
 			//38, 12
-//			world.addPlayer(player, gameMap.at(38, 12));
-			world.addPlayer(player, gameMap1.at(43, 12));
+			world.addPlayer(player, gameMap.at(79, 24));
+//			world.addPlayer(player, gameMap1.at(43, 12));
 
 
 		// Place Yhorm the Giant/boss in the map

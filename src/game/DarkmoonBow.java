@@ -50,4 +50,10 @@ public class DarkmoonBow extends WeaponItem {
         }
         return actions.getUnmodifiableActionList();
     }
+
+    @Override
+    public DropItemAction getDropAction(Actor actor) {
+        return null;
+
+    }
 }

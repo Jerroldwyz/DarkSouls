@@ -128,7 +128,13 @@ public class Player extends Actor implements Soul {
 		ys = new NumberRange(here.y()-3, 7);
 
 		for (int x : xs) {
+			if(x<0 || x>79){
+				break;
+			}
 			for (int y : ys) {
+				if(y<0 || y>25){
+					break;
+				}
 				if (map.isAnActorAt(map.at(x,y)) && map.getActorAt(map.at(x,y)).hasCapability(Status.HOSTILE_TO_PLAYER_ONLY)){
 					Actor target = map.getActorAt(map.at(x,y));
 					RangedAttackAction rangedAttackAction = new RangedAttackAction(target);

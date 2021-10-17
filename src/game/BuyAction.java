@@ -17,15 +17,15 @@ public class BuyAction extends Action {
     /**
      * All the weapons exist in the game abstract from Item class.
      */
-    private Item weapon;
+    private Item item;
 
     /**
      * Constructor.
      *
-     * @param weapon All the weapon in the game.
+     * @param item All the weapon in the game.
      */
-    public BuyAction(Item weapon){
-        this.weapon = weapon;
+    public BuyAction(Item item){
+        this.item = item;
     }
 
     /**
@@ -39,8 +39,8 @@ public class BuyAction extends Action {
         List<Item> items = actor.getInventory();
         String result = "";
 
-        if(this.weapon.getClass() == Broadsword.class){
-            Broadsword broadsword = (Broadsword) weapon;
+        if(this.item.getClass() == Broadsword.class){
+            Broadsword broadsword = (Broadsword) item;
             if(player.getSoulCount() > broadsword.getSoulPrice()){
                 for( Item item : items){
                     if(item.asWeapon() != null){
@@ -55,11 +55,11 @@ public class BuyAction extends Action {
                 result += "Insufficient souls, requires extra " + (500- player.getSoulCount()) + " souls";
                 return result;
             }
-        }else if(this.weapon.getClass() == GiantAxe.class){
-            GiantAxe giantAxe = (GiantAxe) weapon;
-            if(player.getSoulCount() > giantAxe.getSoulPrice()){
-                for( Item item : items){
-                    if(item.asWeapon() != null){
+        }else if(this.item.getClass() == GiantAxe.class) {
+            GiantAxe giantAxe = (GiantAxe) item;
+            if (player.getSoulCount() > giantAxe.getSoulPrice()) {
+                for (Item item : items) {
+                    if (item.asWeapon() != null) {
                         player.removeItemFromInventory(item);
                         player.addItemToInventory(giantAxe);
                         player.subtractSouls(giantAxe.getSoulPrice());
@@ -67,11 +67,12 @@ public class BuyAction extends Action {
                         return result;
                     }
                 }
-            }else{
-                result += "Insufficient souls, requires extra " + (1000- player.getSoulCount()) + " souls";
+            }else {
+                result += "Insufficient souls, requires extra " + (1000 - player.getSoulCount()) + " souls";
                 return result;
             }
         }
+
         return result;
     }
 
@@ -81,6 +82,6 @@ public class BuyAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + weapon.getClass().getSimpleName();
+        return actor + " buys " + item.getClass().getSimpleName();
     }
 }

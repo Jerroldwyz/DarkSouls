@@ -3,6 +3,8 @@ package game;
 import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
 
+import java.util.List;
+
 /**
  * A class for FireKeeper.
  *
@@ -27,6 +29,7 @@ public class FireKeeper extends Actor {
      * The GiantAxe weapon's attributes.
      */
     private GiantAxe giantAxe = new GiantAxe();
+
 
     /**
      * The actions object from the Actions class.
@@ -54,6 +57,14 @@ public class FireKeeper extends Actor {
         if(otherActor.hasCapability(Abilities.BUY)){
             actions.add(new BuyAction(broadSword));
             actions.add(new BuyAction(giantAxe));
+        }
+        List<Item> items = otherActor.getInventory();
+        for(Item item : items){
+            if(item.getClass() == CindersOfTheLord.class && ((CindersOfTheLord) item).lordOfCinder.getClass() == YhormTheGiant.class){
+                actions.add(new TradeCindersOfTheLord(item));
+            }else if(item.getClass() == CindersOfTheLord.class && ((CindersOfTheLord) item).lordOfCinder.getClass() == AldrichTheDevourer.class){
+                actions.add(new TradeCindersOfTheLord(item));
+            }
         }
         return actions;
     }

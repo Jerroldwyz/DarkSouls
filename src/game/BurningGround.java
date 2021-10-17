@@ -93,7 +93,12 @@ public class BurningGround extends Ground {
                     transferSouls(actor, location.map());
                     result += System.lineSeparator() + "LORD OF CINDER FALLEN";
                     System.out.println(result);
-                }else if(target.getClass() == Undead.class){
+                }else if(target.getClass() == AldrichTheDevourer.class){
+                    transferSouls(actor, location.map());
+                    result += System.lineSeparator() + "ALDRICH THE DEVOURER FALLEN";
+                    System.out.println(result);
+                }
+                else if(target.getClass() == Undead.class){
                     transferSouls(actor, location.map());
                     result += System.lineSeparator() + target + " is killed by fire";
                     System.out.println(result);

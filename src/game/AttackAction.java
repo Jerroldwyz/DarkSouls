@@ -112,9 +112,16 @@ public class AttackAction extends Action {
 					result += System.lineSeparator() + target + " is killed.";
 				}
 			}else if(target.getClass() == YhormTheGiant.class){
+//				map.at(map.locationOf(target).x(),map.locationOf(target).y()).addItem(new CindersOfTheLord((YhormTheGiant)target));
 				transferSouls(actor,map);
 				result += System.lineSeparator() + "LORD OF CINDER FALLEN";
-			}else if(target.getClass() == Undead.class){
+
+			}else if(target.getClass() == AldrichTheDevourer.class){
+//				map.at(map.locationOf(target).x(),map.locationOf(target).y()).addItem(new CindersOfTheLord((AldrichTheDevourer)target));
+				transferSouls(actor,map);
+				result += System.lineSeparator() + "ALDRICH THE DEVOURER FALLEN";
+			}
+			else if(target.getClass() == Undead.class){
 				transferSouls(actor,map);
 				result += System.lineSeparator() + target + " is killed.";
 			}
@@ -163,10 +170,10 @@ public class AttackAction extends Action {
 					map.at(mimic.getInitLocation().x(),mimic.getInitLocation().y()).setGround(new Chest());
 					map.removeActor(mimic);
 				}
-				target.heal(1000);
+				target.heal(10000);
 				Player player = (Player) target;
 				player.getEstusFlask().setCharge(3);
-				actor.heal(1000);
+				actor.heal(10000);
 				result += "\n YOU ARE DEAD AND HAS BEEN SENT BACK TO BONFIRE";
 			}
 
